@@ -5,6 +5,13 @@ var User = require('./user');
 
 var schema = new Schema({
     title: {type: String, required: true},
+    category: {type: String, required: true},
+    details: {type: String, required: true},
+    address: {type: String, required: true},
+    capacity: {type: Number, required: true},
+    picture: {type: String, required: true},
+    starttime: {type: Date, required: true},
+    endtime: {type: Date, required: true},
     user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 

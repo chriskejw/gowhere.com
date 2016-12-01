@@ -56,6 +56,13 @@ router.post('/', function (req, res, next) {
         // create and save a new act with user credentials in 'user' field
         var act = new Act({
             title: req.body.title,
+            category: req.body.category,
+            details: req.body.details,
+            address: req.body.address,
+            capacity: req.body.capacity,
+            picture: req.body.picture,
+            starttime: req.body.starttime,
+            endtime: req.body.endtime,
             user: user
         });
         act.save(function (err, result) {

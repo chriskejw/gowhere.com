@@ -26,7 +26,17 @@ export class ActInputComponent implements OnInit {
             this.act = null;
         } else {
             // Create
-            const act = new Act(form.value.title, 'Max');
+            const act = new Act(
+                form.value.title,
+                form.value.category,
+                form.value.details,
+                form.value.address,
+                form.value.capacity,
+                form.value.picture,
+                form.value.starttime,
+                form.value.endtime,
+                'Max'
+            );
             this.actService.addAct(act)
                 .subscribe(
                     data => console.log(data),

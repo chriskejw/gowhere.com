@@ -37,6 +37,13 @@ export class ActService {
                 const result = response.json();
                 const act = new Act(
                     result.obj.title,
+                    result.obj.category,
+                    result.obj.details,
+                    result.obj.address,
+                    result.obj.capacity,
+                    result.obj.picture,
+                    result.obj.starttime,
+                    result.obj.endtime,
                     result.obj.user.username,
                     result.obj._id,
                     result.obj.user._id);
@@ -62,6 +69,13 @@ export class ActService {
                 for (let act of acts) {
                     transformedActs.push(new Act(
                         act.title,
+                        act.category,
+                        act.details,
+                        act.address,
+                        act.capacity,
+                        act.picture,
+                        act.starttime,
+                        act.endtime,
                         act.user.firstName,
                         act._id,
                         act.user._id)
