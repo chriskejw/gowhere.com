@@ -1,0 +1,50 @@
+<div class="col-md-8 col-md-offset-2">
+    <!--tells ng to use our form, 'myForm'-->
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    formControlName="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    formControlName="password">
+        </div>
+        <div class="form-group">
+            <label for="usertype">User Type</label><br>
+            <input type="radio" value="participant" formControlName="usertype"
+                    #typeinput1 (click)="typeChange(typeinput1.value)" checked="checked"> participant<br>
+            <input type="radio" value="host" formControlName="usertype"
+                    #typeinput2 (click)="typeChange(typeinput2.value)"> host<br>
+        </div>
+        <div class="form-group">
+            <label for="username" id="hostname">Username</label>
+            <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    formControlName="username">
+        </div>
+        <div class="form-group" *ngIf="(host)">
+            <label for="hostcode">Host Code</label>
+            <input
+                    type="text"
+                    id="hostcode"
+                    class="form-control"
+                    formControlName="hostcode">
+        </div>
+        <!--disable button if form not valid-->
+        <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!myForm.valid">Submit
+        </button>
+    </form>
+</div>

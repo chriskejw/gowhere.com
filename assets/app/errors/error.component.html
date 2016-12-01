@@ -1,0 +1,23 @@
+<!--ngStyle directive with display properties of variable display-->
+<!--display is none to hide the error modal-->
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--click listener of onErrorHandled to change back to display none-->
+                <button type="button" class="close" aria-label="Close" (click)="onErrorHandled()"><span aria-hidden="true">&times;</span></button>
+                <!--error?.title as no error yet -->
+                <h4 class="modal-title">{{ error?.title }}</h4>
+            </div>
+            <div class="modal-body">
+                <!--error?.act as no error yet -->
+                <p>{{ error?.act }}</p>
+            </div>
+            <div class="modal-footer">
+                <!--click listener of onErrorHandled to change back to display none-->
+                <button type="button" class="btn btn-default" (click)="onErrorHandled()">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
