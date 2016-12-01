@@ -66,6 +66,7 @@ export class SignupComponent implements OnInit {
         if (value == "host") {
             this.host = true;
             document.getElementById('hostname').textContent = 'Company name'
+            alert('hahahaha');
         } else {
             this.host = false;
             document.getElementById('hostname').textContent = 'Username'
