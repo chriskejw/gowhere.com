@@ -16,6 +16,7 @@ import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
 import { LogoutComponent } from "./auth/logout.component";
 import { ErrorComponent } from "./errors/error.component";
+import { MainComponent } from "./main/main.component";
 
 // services
 import { AuthService } from "./auth/auth.service";
@@ -34,7 +35,8 @@ import { ActService } from "./acts/act.service";
         SignupComponent,
         SigninComponent,
         LogoutComponent,
-        ErrorComponent
+        ErrorComponent,
+        MainComponent
     ],
     imports: [
         BrowserModule,
