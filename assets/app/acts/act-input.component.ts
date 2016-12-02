@@ -19,9 +19,19 @@ export class ActInputComponent implements OnInit {
         if (this.act) {
             // Edit
             this.act.title = form.value.title;
+            this.act.category = form.value.category;
+            this.act.details = form.value.details;
+            this.act.address = form.value.address;
+            this.act.capacity = form.value.capacity;
+            this.act.picture = form.value.picture;
+            this.act.starttime = form.value.starttime;
+            this.act.endtime = form.value.endtime;
             this.actService.updateAct(this.act)
                 .subscribe(
-                    result => console.log(result)
+                    result => {
+                        console.log(result),
+                        form.resetForm();
+                    }
                 );
             this.act = null;
         } else {
@@ -39,11 +49,14 @@ export class ActInputComponent implements OnInit {
             );
             this.actService.addAct(act)
                 .subscribe(
-                    data => console.log(data),
+                    data => {
+                        console.log(data)
+                        form.resetForm();
+                    }
                     // error => console.error(error)
                 );
         }
-        form.resetForm();
+        
     }
 
     onClear(form: NgForm) {

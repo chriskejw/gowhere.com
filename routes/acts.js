@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
                 });
             }
             res.status(200).json({
-                act: 'Success',
+                message: 'Success',
                 obj: acts
             });
         });
@@ -35,7 +35,7 @@ router.use('/', function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: err
+                error: { message: 'Please login as a host to create an event.' }
             });
         }
         next();
@@ -50,7 +50,7 @@ router.post('/', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
-                error: err
+                error: { message: 'User not found.' }
             });
         }
         // create and save a new act with user credentials in 'user' field
@@ -69,7 +69,7 @@ router.post('/', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
-                    error: err
+                    error: { message: 'Unable to save act.' }
                 });
             }
             // add the new act into the user.acts array
@@ -77,7 +77,7 @@ router.post('/', function (req, res, next) {
             user.acts.push(result);
             user.save();
             res.status(201).json({
-                act: 'Saved act',
+                message: 'Saved act',
                 obj: result
             });
         });
@@ -97,14 +97,14 @@ router.patch('/:id', function (req, res, next) {
         }
         if (!act) {
             return res.status(500).json({
-                title: 'No Act Found!',
-                error: {act: 'Act not found'}
+                title: 'An error occurred',
+                error: {message: 'Act not found'}
             });
         }
         if (act.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: {act: 'Users do not match'}
+                error: {message: 'Users do not match'}
             });
         }
         act.title = req.body.title;
@@ -112,11 +112,11 @@ router.patch('/:id', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
-                    error: err
+                    error: { message: 'Unable to edit act.' }
                 });
             }
             res.status(200).json({
-                act: 'Updated act',
+                message: 'Updated act',
                 obj: result
             });
         });
@@ -131,30 +131,30 @@ router.delete('/:id', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
-                error: err
+                error: { message: 'User not found.' }
             });
         }
         if (!act) {
             return res.status(500).json({
-                title: 'No Act Found!',
-                error: {act: 'Act not found'}
+                title: 'An error occurred',
+                error: {message: 'Act not found'}
             });
         }
         if (act.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: {act: 'Users do not match'}
+                error: {message: 'Users do not match'}
             });
         }
         act.remove(function (err, result) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
-                    error: err
+                    error: { message: 'Unable to delete act.' }
                 });
             }
             res.status(200).json({
-                act: 'Deleted act',
+                message: 'Deleted act',
                 obj: result
             });
         });

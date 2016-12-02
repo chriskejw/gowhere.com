@@ -7,23 +7,45 @@ var User = require('../models/user');
 
 // create a new user, hash password with bcrypt
 router.post('/', function (req, res, next) {
-    var user = new User({
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10),
-        usertype: req.body.usertype,
-        username: req.body.username
-    });
-    user.save(function(err, result) {
-        if (err) {
+    User.findOne({email: req.body.email}, function(err, user) {
+        if (user) {
             return res.status(500).json({
                 title: 'An error occurred',
-                error: err
+                error: { message: 'Email has been taken.' }
             });
         }
-        res.status(201).json({
-            act: 'User created',
-            obj: result
-        });
+        if (req.body.usertype === 'participant' || req.body.usertype === 'host') {
+            if (req.body.usertype === 'host' && req.body.hostcode !== 'chriske') {
+                return res.status(500).json({
+                        title: 'An error occurred',
+                        error: { message: 'Invalid host code. Please email us for a host code.' }
+                });
+            }
+            var user = new User({
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password, 10),
+                usertype: req.body.usertype,
+                username: req.body.username
+            });
+            user.save(function(err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occurred',
+                        error: { message: 'Unable to create new user.' }
+                    });
+                }
+                res.status(201).json({
+                    message: 'User created',
+                    obj: result
+                });
+            });
+        } else {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: { message: 'Invalid usertype entered.' }
+            });
+        }
+        
     });
 });
 
@@ -33,19 +55,19 @@ router.post('/signin', function(req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
-                error: err
+                error: { message: 'Email not found.' }
             });
         }
         if (!user) {
             return res.status(401).json({
                 title: 'Login failed',
-                error: {act: 'Invalid login credentials'}
+                error: {message: 'Invalid login credentials.'}
             });
         }
         if (!bcrypt.compareSync(req.body.password, user.password)) {
             return res.status(401).json({
                 title: 'Login failed',
-                error: {act: 'Invalid login credentials'}
+                error: {message: 'Invalid email or password entered.'}
             });
         }
 
@@ -60,7 +82,7 @@ router.post('/signin', function(req, res, next) {
 
         // if success, respond with act, token, and user id
         res.status(200).json({
-            act: 'Successfully logged in',
+            message: 'Successfully logged in',
             token: token,
             userId: user._id
         });
