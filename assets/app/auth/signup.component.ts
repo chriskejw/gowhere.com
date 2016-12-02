@@ -11,8 +11,11 @@ import { User } from "./user.model";
 export class SignupComponent implements OnInit {
     // set myForm variable as a type of FormGroup
     // host local variable to differentiate participant and host sign up
+    // char local variables to show user minimum length of field
     myForm: FormGroup;
     host: boolean = false;
+    passwordchar: number = 6;
+    usernamechar: number = 6;
 
     constructor(private authService: AuthService) {}
 
@@ -23,18 +26,20 @@ export class SignupComponent implements OnInit {
             this.myForm.value.email,
             this.myForm.value.password,
             this.myForm.value.usertype,
-            this.myForm.value.username
+            this.myForm.value.username,
+            this.myForm.value.hostcode
         );
         // the service function 'signup' returns an observable so we have to use subscribe to retrieve it
         // subscribe sends the request and logs the callbacks
         // .subscribe(success, error, complete), not using complete
         this.authService.signup(user)
             .subscribe(
-                data => console.log(data),
+                data => {
+                    console.log(data)
+                    this.myForm.reset();
+                },
                 error => console.error(error)
             );
-        // reset the form
-        this.myForm.reset();
     }
 
     // FormGroup quite heavy so not used in the constructor
@@ -54,9 +59,15 @@ export class SignupComponent implements OnInit {
                 Validators.required,
                 Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             ]),
-            password: new FormControl(null, Validators.required),
+            password: new FormControl(null, [
+                Validators.required,
+                Validators.minLength(6)
+            ]),
             usertype: new FormControl(null, Validators.required),
-            username: new FormControl(null, Validators.required),
+            username: new FormControl(null, [
+                Validators.required,
+                Validators.minLength(6)
+            ]),
             hostcode: new FormControl(null)
         });
     }
@@ -69,6 +80,24 @@ export class SignupComponent implements OnInit {
         } else {
             this.host = false;
             document.getElementById('hostname').textContent = 'Username'
+        }
+    }
+    
+    // on keyup, count the length of password and place in the view
+    passwordCounter() {
+        if (this.myForm.value.password.length <= 6) {
+            this.passwordchar = 6 - this.myForm.value.password.length
+        } else {
+            this.passwordchar = 0
+        }
+    }
+
+    // on keyup, count the length of username and place in the view
+    usernameCounter() {
+        if (this.myForm.value.username.length <= 6) {
+            this.usernamechar = 6 - this.myForm.value.username.length
+        } else {
+            this.usernamechar = 0
         }
     }
 }
