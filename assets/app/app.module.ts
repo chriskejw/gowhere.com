@@ -6,6 +6,7 @@ import { HttpModule } from "@angular/http";
 // components
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header.component";
+import { FooterComponent } from "./footer.component";
 import { routing } from "./app.routing";
 import { ActComponent } from "./acts/act.component";
 import { ActListComponent } from "./acts/act-list.component";
@@ -27,6 +28,7 @@ import { ActService } from "./acts/act.service";
     declarations: [
         AppComponent,
         HeaderComponent,
+        FooterComponent,
         ActComponent,
         ActListComponent,
         ActInputComponent,
