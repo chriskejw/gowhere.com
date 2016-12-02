@@ -1,0 +1,17 @@
+.footer {
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.nav.nav-pills.nav-justified li a {
+    color: #a2a2a0;
+}
+
+.nav.nav-pills.nav-justified li a:hover {
+    background: #141414;
+    color: white;
+}
+
+.nav.nav-pills.nav-justified li a:focus {
+    background: #141414;
+}

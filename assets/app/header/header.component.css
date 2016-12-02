@@ -1,0 +1,21 @@
+.navbar.navbar-default {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: #141414;
+    border: 0px;
+}
+
+.navbar-default a.navbar-brand {
+    color: red;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background: #141414;
+}
+
+.nav.navbar-nav a {
+    color: white;
+}
+
+.nav.navbar-nav a:hover {
+    color: #a2a2a0;
+}
