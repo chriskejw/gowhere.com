@@ -30,11 +30,12 @@ export class SigninComponent {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
                     this.router.navigateByUrl('/');
+                    this.myForm.reset();
                 },
-                error => console.error(error)
+                error => {
+                    console.error(error);
+                }
             );
-        // reset the form
-        this.myForm.reset();
     }
 
     // FormGroup quite heavy so not used in the constructor

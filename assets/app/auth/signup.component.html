@@ -10,27 +10,40 @@
                     formControlName="email">
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Password </label>
+            <span *ngIf="passwordchar != 0">(min char: {{passwordchar}})</span>
             <input
                     type="password"
                     id="password"
                     class="form-control"
-                    formControlName="password">
+                    formControlName="password"
+                    (keyup)='passwordCounter()'>
         </div>
         <div class="form-group">
             <label for="usertype">User Type</label><br>
-            <input type="radio" value="participant" formControlName="usertype"
-                    #typeinput1 (click)="typeChange(typeinput1.value)" checked="checked"> participant<br>
-            <input type="radio" value="host" formControlName="usertype"
-                    #typeinput2 (click)="typeChange(typeinput2.value)"> host<br>
+            <input 
+                    type="radio"
+                    value="participant"
+                    formControlName="usertype"
+                    #participantinput
+                    (click)="typeChange(participantinput.value)"
+                    checked> participant<br>
+            <input 
+                    type="radio"
+                    value="host"
+                    formControlName="usertype"
+                    #hostinput
+                    (click)="typeChange(hostinput.value)"> host<br>
         </div>
         <div class="form-group">
-            <label for="username" id="hostname">Username</label>
+            <label for="username" id="hostname">Username </label>
+            <span *ngIf="usernamechar != 0">(min char: {{usernamechar}})</span>
             <input
                     type="text"
                     id="username"
                     class="form-control"
-                    formControlName="username">
+                    formControlName="username"
+                    (keyup)='usernameCounter()'>
         </div>
         <div class="form-group" *ngIf="(host)">
             <label for="hostcode">Host Code</label>

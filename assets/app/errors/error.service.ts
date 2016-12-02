@@ -8,7 +8,7 @@ export class ErrorService {
 
     // creates and emits a new error based on the Error model
     handleError(error: any) {
-        const errorData = new Error(error.title, error.error.act);
+        const errorData = new Error(error.title, error.error.message);
         this.errorOccurred.emit(errorData);
     }
 }
