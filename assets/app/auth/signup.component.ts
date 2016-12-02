@@ -84,8 +84,9 @@ export class SignupComponent implements OnInit {
     }
     
     // on keyup, count the length of password and place in the view
+    // require the this.myForm.value.password && because value could be null and can't count length
     passwordCounter() {
-        if (this.myForm.value.password.length <= 6) {
+        if (this.myForm.value.password && this.myForm.value.password.length <= 6) {
             this.passwordchar = 6 - this.myForm.value.password.length
         } else {
             this.passwordchar = 0
@@ -94,7 +95,7 @@ export class SignupComponent implements OnInit {
 
     // on keyup, count the length of username and place in the view
     usernameCounter() {
-        if (this.myForm.value.username.length <= 6) {
+        if (this.myForm.value.username && this.myForm.value.username.length <= 6) {
             this.usernamechar = 6 - this.myForm.value.username.length
         } else {
             this.usernamechar = 0
