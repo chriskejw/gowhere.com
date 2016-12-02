@@ -52,8 +52,8 @@ export class ActInputComponent implements OnInit {
                     data => {
                         console.log(data)
                         form.resetForm();
-                    }
-                    // error => console.error(error)
+                    },
+                    error => console.error(error)
                 );
         }
         
