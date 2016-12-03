@@ -30,9 +30,11 @@ a.danger {
 
 input.ng-invalid.ng-touched {
   border: 1px solid red;
+  color: darkred;
 }
 
 
+<<<<<<< HEAD
 
 
 
@@ -119,3 +121,5 @@ body {
     -webkit-animation-delay: .45s;
     animation-delay: .45s
 }
+=======
+>>>>>>> actvalidation

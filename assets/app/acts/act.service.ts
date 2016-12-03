@@ -90,8 +90,8 @@ export class ActService {
             });
     }
 
-    // emits the act
-//WHAT???
+    /* emits the act user wants to edit to act-input component,
+    which is subscribed to the event emitter*/
     editAct(act: Act) {
         this.actIsEdit.emit(act);
     }
