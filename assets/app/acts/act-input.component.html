@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <span>(jpg/png/jpeg)</span>
+            <span *ngIf="!myForm.valid">( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <span>(jpg/png/jpeg)</span>
+            <span>( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -89,10 +89,9 @@
         </div>
         <div class="form-group">
             <label for="websiteurl">Website Url</label>
-            <span>(jpg/png/jpeg)</span>
             <input
                 type="text"
-                placeholder="Enter website url here"
+                placeholder="https://gowhere.com.sg"
                 id="websiteurl"
                 class="form-control"
                 formControlName="websiteurl"

@@ -13,6 +13,10 @@ import { Act } from "./act.model";
         label, span {
             color: white;
         }
+        input.ng-invalid.ng-touched {
+            border: 1px solid red;
+            color: darkred;
+        }
         textarea.ng-invalid.ng-touched {
             border: 1px solid red;
             color: darkred;
@@ -140,7 +144,7 @@ export class ActInputComponent implements OnInit {
                 Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
             ]),
             websiteurl: new FormControl(null, [
-                Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
+                Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
             ]),
             starttime: new FormControl(null),
             endtime: new FormControl(null)

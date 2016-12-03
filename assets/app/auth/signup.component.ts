@@ -13,6 +13,7 @@ import { User } from "./user.model";
         }
         input.ng-invalid.ng-touched {
             border: 1px solid red;
+            color: darkred;
         }
         span.danger {
             color: red;
@@ -73,12 +74,14 @@ export class SignupComponent implements OnInit {
             ]),
             password: new FormControl(null, [
                 Validators.required,
-                Validators.minLength(6)
+                Validators.minLength(6),
+                Validators.maxLength(12)
             ]),
             usertype: new FormControl(null, Validators.required),
             username: new FormControl(null, [
                 Validators.required,
-                Validators.minLength(6)
+                Validators.minLength(6),
+                Validators.maxLength(30)
             ]),
             hostcode: new FormControl(null)
         });
