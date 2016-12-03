@@ -7,7 +7,15 @@ import { AuthService } from "./auth.service";
 
 @Component({
     selector: 'app-signin',
-    templateUrl: './signin.component.html'
+    templateUrl: './signin.component.html',
+    styleUrls: [`
+        label, span {
+            color: white;
+        }
+        input.ng-invalid.ng-touched {
+            border: 1px solid red;
+        }
+    `]
 })
 export class SigninComponent {
     // set myForm variable as a type of FormGroup

@@ -42,6 +42,8 @@ export class ActService {
                     result.obj.address,
                     result.obj.capacity,
                     result.obj.picture,
+                    result.obj.thumbnail,
+                    result.obj.websiteurl,
                     result.obj.starttime,
                     result.obj.endtime,
                     result.obj.user.username,
@@ -74,6 +76,8 @@ export class ActService {
                         act.address,
                         act.capacity,
                         act.picture,
+                        act.thumbnail,
+                        act.websiteurl,
                         act.starttime,
                         act.endtime,
                         act.user.firstName,
@@ -90,8 +94,8 @@ export class ActService {
             });
     }
 
-    // emits the act
-//WHAT???
+    /* emits the act user wants to edit to act-input component,
+    which is subscribed to the event emitter*/
     editAct(act: Act) {
         this.actIsEdit.emit(act);
     }

@@ -15,11 +15,18 @@ import { ActService } from "./act.service";
             font-size: 12px;
             width: 80%;
         }
+
         .config {
             display: inline-block;
             text-align: right;
             font-size: 12px;
             width: 19%;
+        }
+        a {
+            cursor: pointer;
+        }
+        a:hover, a:active {
+            text-decoration: underline;
         }
     `]
 })

@@ -11,23 +11,23 @@
         </div>
         <div class="form-group">
             <label for="password">Password </label>
-            <span *ngIf="passwordchar != 0">(min char: {{passwordchar}})</span>
+            <span *ngIf="passwordchar > 0 && passwordchar < 6">(min char: {{passwordchar}})</span>
             <input
                     type="password"
                     id="password"
                     class="form-control"
                     formControlName="password"
-                    (keyup)='passwordCounter()'>
+                    (keyup)='inputCounter()'>
         </div>
-        <div class="form-group">
+        <div class="form-group radiotext">
             <label for="usertype">User Type</label><br>
             <input 
                     type="radio"
                     value="participant"
                     formControlName="usertype"
                     #participantinput
-                    (click)="typeChange(participantinput.value)"
-                    checked> participant<br>
+                    id="checkparticipant"
+                    (click)="typeChange(participantinput.value)"> participant<br>
             <input 
                     type="radio"
                     value="host"
@@ -36,14 +36,14 @@
                     (click)="typeChange(hostinput.value)"> host<br>
         </div>
         <div class="form-group">
-            <label for="username" id="hostname">Username </label>
-            <span *ngIf="usernamechar != 0">(min char: {{usernamechar}})</span>
+            <label for="username" id="hostname">{{usernameLabel}} </label>
+            <span *ngIf="usernamechar > 0 && usernamechar < 6">(min char: {{usernamechar}})</span>
             <input
                     type="text"
                     id="username"
                     class="form-control"
                     formControlName="username"
-                    (keyup)='usernameCounter()'>
+                    (keyup)='inputCounter()'>
         </div>
         <div class="form-group" *ngIf="(host)">
             <label for="hostcode">Host Code</label>

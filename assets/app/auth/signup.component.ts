@@ -6,7 +6,18 @@ import { User } from "./user.model";
 
 @Component({
     selector: 'app-signup',
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    styleUrls: [`
+        .radiotext, label, span {
+            color: white;
+        }
+        input.ng-invalid.ng-touched {
+            border: 1px solid red;
+        }
+        span.danger {
+            color: red;
+        }
+    `]
 })
 export class SignupComponent implements OnInit {
     // set myForm variable as a type of FormGroup
@@ -14,8 +25,9 @@ export class SignupComponent implements OnInit {
     // char local variables to show user minimum length of field
     myForm: FormGroup;
     host: boolean = false;
-    passwordchar: number = 6;
-    usernamechar: number = 6;
+    usernameLabel: string = 'Username';
+    passwordchar: number;
+    usernamechar: number;
 
     constructor(private authService: AuthService) {}
 
@@ -75,29 +87,24 @@ export class SignupComponent implements OnInit {
     // typeChange function called when press radio button usertype, change form view
     typeChange(value: string) {
         if (value == "host") {
-            this.host = true;
-            document.getElementById('hostname').textContent = 'Company name'
+            this.host = true
+            this.usernameLabel = 'Company name'
         } else {
-            this.host = false;
-            document.getElementById('hostname').textContent = 'Username'
+            this.host = false
+            this.usernameLabel = 'Username'
         }
     }
     
-    // on keyup, count the length of password and place in the view
-    passwordCounter() {
-        if (this.myForm.value.password.length <= 6) {
-            this.passwordchar = 6 - this.myForm.value.password.length
-        } else {
-            this.passwordchar = 0
+    // on keyup, count the length of password and username and place in the view
+    // this.myForm.value. because value could be null and can't count length
+    inputCounter() {
+        this.passwordchar = 6;
+        if (this.myForm.value.password) {
+            this.passwordchar -= this.myForm.value.password.length
         }
-    }
-
-    // on keyup, count the length of username and place in the view
-    usernameCounter() {
-        if (this.myForm.value.username.length <= 6) {
-            this.usernamechar = 6 - this.myForm.value.username.length
-        } else {
-            this.usernamechar = 0
+        this.usernamechar = 6;
+        if (this.myForm.value.username) {
+            this.usernamechar -= this.myForm.value.username.length
         }
     }
 }
