@@ -10,6 +10,9 @@ import { Act } from "./act.model";
     selector: 'app-act-input',
     templateUrl: './act-input.component.html',
     styles: [`
+        label, span {
+            color: white;
+        }
         textarea.ng-invalid.ng-touched {
             border: 1px solid red;
             color: darkred;
@@ -42,6 +45,8 @@ export class ActInputComponent implements OnInit {
             this.act.address = this.myForm.value.address;
             this.act.capacity = this.myForm.value.capacity;
             this.act.picture = this.myForm.value.picture;
+            this.act.thumbnail = this.myForm.value.thumbnail;
+            this.act.websiteurl = this.myForm.value.websiteurl;
             this.act.starttime = this.myForm.value.starttime;
             this.act.endtime = this.myForm.value.endtime;
 
@@ -63,10 +68,13 @@ export class ActInputComponent implements OnInit {
                 this.myForm.value.address,
                 this.myForm.value.capacity,
                 this.myForm.value.picture,
+                this.myForm.value.thumbnail,
+                this.myForm.value.websiteurl,
                 this.myForm.value.starttime,
                 this.myForm.value.endtime,
                 'Max'
             );
+            console.log(act)
             this.actService.addAct(act)
                 .subscribe(
                     data => {
@@ -125,6 +133,13 @@ export class ActInputComponent implements OnInit {
             ]),
             picture: new FormControl(null, [
                 Validators.required,
+                Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
+            ]),
+            thumbnail: new FormControl(null, [
+                Validators.required,
+                Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
+            ]),
+            websiteurl: new FormControl(null, [
                 Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
             ]),
             starttime: new FormControl(null),

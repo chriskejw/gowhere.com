@@ -8,8 +8,10 @@ var schema = new Schema({
     category: {type: String, required: true},
     details: {type: String, required: true},
     address: {type: String, required: true},
-    capacity: {type: Number, required: true},
+    capacity: {type: Number},
     picture: {type: String, required: true},
+    thumbnail: {type: String, required: true},
+    websiteurl: {type: String},
     starttime: {type: Date, required: true},
     endtime: {type: Date, required: true},
     user: {type: Schema.Types.ObjectId, ref: 'User'}

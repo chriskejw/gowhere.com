@@ -61,6 +61,8 @@ router.post('/', function (req, res, next) {
             address: req.body.address,
             capacity: req.body.capacity,
             picture: req.body.picture,
+            thumbnail: req.body.thumbnail,
+            websiteurl: req.body.websiteurl,
             starttime: req.body.starttime,
             endtime: req.body.endtime,
             user: user
