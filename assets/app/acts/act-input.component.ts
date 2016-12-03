@@ -8,13 +8,25 @@ import { Act } from "./act.model";
 // renders the act form using template driven form
 @Component({
     selector: 'app-act-input',
-    templateUrl: './act-input.component.html'
+    templateUrl: './act-input.component.html',
+    styles: [`
+        textarea.ng-invalid.ng-touched {
+            border: 1px solid red;
+            color: darkred;
+        }
+        span.danger {
+            color: red;
+        }
+    `]
 })
 
 export class ActInputComponent implements OnInit {
     myForm: FormGroup;
     act: Act;
     categories: string[];
+    titlechar: number;
+    detailschar: number;
+    capchar: number;
 
     constructor(private actService: ActService) {
         this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
@@ -71,6 +83,22 @@ export class ActInputComponent implements OnInit {
         this.myForm.reset();
     }
 
+    // on keyup, count the length of title and place in the view
+    // this.myForm.value.title because value could be null and can't count length
+    inputCounter() {
+        this.titlechar = 6;
+        if (this.myForm.value.title) {
+            this.titlechar -= this.myForm.value.title.length
+        }
+        this.detailschar = 20;
+        if (this.myForm.value.details) {
+            this.detailschar -= this.myForm.value.details.length
+        }
+        if (this.myForm.value.capacity) {
+            this.capchar = this.myForm.value.capacity
+        }
+    }
+
     ngOnInit() {
         // listening to actService's event emitter which activates when edit pressed
         // this.act values are placed in the form because of [ngModel] in the html
@@ -80,12 +108,25 @@ export class ActInputComponent implements OnInit {
 
         // form validations
         this.myForm = new FormGroup({
-            title: new FormControl(null, Validators.required),
+            title: new FormControl(null, [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(40)
+            ]),
             category: new FormControl(null, Validators.required),
-            details: new FormControl(null, Validators.required),
+            details: new FormControl(null, [
+                Validators.required,
+                Validators.minLength(20),
+                Validators.maxLength(100)
+            ]),
             address: new FormControl(null, Validators.required),
-            capacity: new FormControl(null, Validators.required),
-            picture: new FormControl(null, Validators.required),
+            capacity: new FormControl(null, [
+                Validators.pattern("^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9])$")
+            ]),
+            picture: new FormControl(null, [
+                Validators.required,
+                Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
+            ]),
             starttime: new FormControl(null),
             endtime: new FormControl(null)
         });

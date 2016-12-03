@@ -3,13 +3,16 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title">Title</label>
+            <span *ngIf="titlechar > 0 && titlechar < 6">(min char: {{titlechar}})</span>
+            <span class="danger" *ngIf="titlechar < -34">(max char: 40)</span>
             <input 
                 type="text"
                 placeholder="Enter title here"
                 id="title"
                 class="form-control"
                 formControlName="title"
-                [ngModel]="act?.title">
+                [ngModel]="act?.title"
+                (keyup)='inputCounter()'>
         </div>
         <div class="form-group">
             <label for="category">Category</label>
@@ -27,13 +30,16 @@
         </div>
         <div class="form-group">
             <label for="details">Details</label>
+            <span *ngIf="detailschar > 0 && detailschar < 20">(min char: {{detailschar}})</span>
+            <span class="danger" *ngIf="detailschar < -80">(max char: 100)</span>
             <textarea
                 rows="4"
                 placeholder="Describe the act"
                 id="details"
                 class="form-control"
                 formControlName="details"
-                [ngModel]="act?.details">
+                [ngModel]="act?.details"
+                (keyup)='inputCounter()'>
             </textarea>
         </div>
         <div class="form-group">
@@ -48,16 +54,20 @@
         </div>
         <div class="form-group">
             <label for="capacity">Capacity</label>
+            <span class="danger" *ngIf="capchar < 1">(Invalid Capacity)</span>
+            <span class="danger" *ngIf="capchar > 9999">(Max: 9999 pax)</span>
             <input
                 type="number"
                 placeholder="Capacity of act"
                 id="capacity"
                 class="form-control"
                 formControlName="capacity"
-                [ngModel]="act?.capacity">
+                [ngModel]="act?.capacity"
+                (keyup)='inputCounter()'>
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
+            <span>(jpg/png/jpeg)</span>
             <input
                 type="text"
                 placeholder="Enter picture url here"
