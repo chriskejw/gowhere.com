@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
         <div class="row">
             <app-act-input></app-act-input>
         </div>
-        <hr>
+        
         <div class="row">
             <app-act-list></app-act-list>
         </div>

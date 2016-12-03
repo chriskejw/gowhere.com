@@ -5,8 +5,8 @@ import { HttpModule } from "@angular/http";
 
 // components
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./header.component";
-import { FooterComponent } from "./footer.component";
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
 import { routing } from "./app.routing";
 import { ActComponent } from "./acts/act.component";
 import { ActListComponent } from "./acts/act-list.component";
@@ -18,6 +18,7 @@ import { SigninComponent } from "./auth/signin.component";
 import { LogoutComponent } from "./auth/logout.component";
 import { ErrorComponent } from "./errors/error.component";
 import { MainComponent } from "./main/main.component";
+import { MainDetailComponent } from "./main/main-detail/main-detail.component";
 
 // services
 import { AuthService } from "./auth/auth.service";
@@ -38,7 +39,8 @@ import { ActService } from "./acts/act.service";
         SigninComponent,
         LogoutComponent,
         ErrorComponent,
-        MainComponent
+        MainComponent,
+        MainDetailComponent
     ],
     imports: [
         BrowserModule,
