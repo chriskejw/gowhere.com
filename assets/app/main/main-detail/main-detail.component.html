@@ -1,36 +1,15 @@
-<!--?: add ? to only try to access it if it is set, otherwise you get an error-->
-<div class='row'>
+<div class="popDown">
+    
+    <div class="col-9 col-m-9 leftImage">
+        <img class="col-9 col-m-9" src ="http://www.skiheavenly.com/~/media/heavenly/images/732x260%20header%20images/events-heavenly-header.ashx" alt="some description"/>
+    </div>
 
-  <div class='col-xs-12'>
-    <img src="{{selectedRecipe?.imagePath}}" alt="" class='img-responsive'>
-  </div>
+    <i class="fa fa-times close" aria-hidden="true" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'></i>
 
-<div class='row'>
-  <div class='col-xs-12'>
-    <h1>{{selectedRecipe?.name}}</h1>
-  </div>
-</div>
+    <div class="col-3 col-m-3 rightDetail">
+        <h3 class="title">Party Like There Is No Tomorrow</h3>
+        <h4 class="urlLink">www.google.com</h4>
+        <p class="description">OI OI OI description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etcthis is a short description yada yada peanuts etc </p>
+    </div>
 
-  <div class='col-xs-12'>
-    <button class='btn btn-success' (click)='onAddToShoppingList()'>To Shopping List</button>
-    <button class='btn btn-primary' (click)='onEdit()'>Edit</button>
-    <button class='btn btn-danger' (click)='onDelete()'>Delete</button>
-  </div>
-
-</div>
-
-<hr>
-
-<div class='row'>
-  <div class='col-xs-12'>
-    <p>{{selectedRecipe?.description}}</p>
-  </div>
-</div>
-
-<div class='row'>
-  <div class='col-xs-12'>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor='let item of selectedRecipe?.ingredients'>{{item.name}} ({{item.amount}})</li>
-    </ul>
-  </div>
 </div>

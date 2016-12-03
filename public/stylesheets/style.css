@@ -1,22 +1,15 @@
-html {
-  background: #141414;
-}
-
 body {
   padding: 1% 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #141414;
-  /*color: #00B7FF;*/
 }
 
 a {
-  /*color: #00B7FF;*/
   cursor: pointer;
 }
 
 a:hover,
 a:active {
-  /*color: #00B7FF;*/
   text-decoration: underline;
 }
 
@@ -39,16 +32,30 @@ input.ng-invalid.ng-touched {
 
 
 
+/*=========================================
+Applicable to everything
+===========================================*/
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
-html,
-body {
+html, body {
   height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #141414;
 }
 
 body {
   position: relative;
 }
 
+/*=========================================
+Loading Animation
+===========================================*/
 @-webkit-keyframes animIn {
     0% {
         -webkit-transform: translateX(-100px);
