@@ -1,22 +1,15 @@
-html {
-  background: #141414;
-}
-
 body {
   padding: 1% 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #141414;
-  /*color: #00B7FF;*/
 }
 
 a {
-  /*color: #00B7FF;*/
   cursor: pointer;
 }
 
 a:hover,
 a:active {
-  /*color: #00B7FF;*/
   text-decoration: underline;
 }
 
@@ -30,20 +23,9 @@ a.danger {
 
 input.ng-invalid.ng-touched {
   border: 1px solid red;
-  color: darkred;
 }
 
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-html,
-body {
+html, body {
   height: 100%;
 }
 
@@ -121,5 +103,3 @@ body {
     -webkit-animation-delay: .45s;
     animation-delay: .45s
 }
-=======
->>>>>>> actvalidation
