@@ -42,20 +42,7 @@ h3 {
   white-space: nowrap;
   margin: 50px 0;
   padding-bottom: 10px;
-}
-
-.tile {
-  position: relative;
-  display: inline-block;
   width: 250px;
-  height: 140px;
-  margin-right: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  -webkit-transition: 500ms all;
-  transition: 500ms all;
-  -webkit-transform-origin: center left;
-          transform-origin: center left;
 }
 
 .tile__img {
@@ -75,8 +62,42 @@ h3 {
   opacity: 0;
   background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
   background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-  /*-webkit-transition: 450ms opacity;
-  transition: 450ms opacity;*/
+}
+
+.tile {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 140px;
+  margin-right: 5px;
+  cursor: pointer;
+  -webkit-transition: 500ms all;
+  transition: 500ms all;
+  -webkit-transform-origin: center left;
+          transform-origin: center left;
+}
+
+.tile__title {
+  position: absolute;
+  bottom: 20px;
+  padding: 5px;
+  color: white;
+  background:rgba(0,0,0,0);
+  
+  max-width: 400px;
+  width: 100%;
+  white-space: pre-wrap;      /* CSS3 */   
+  white-space: -moz-pre-wrap; /* Firefox */    
+  white-space: -pre-wrap;     /* Opera <7 */   
+  white-space: -o-pre-wrap;   /* Opera 7 */    
+  word-wrap: break-word;      /* IE */
+}
+
+p.detailDetail {
+  font-size: 8px;
+  margin: 0;
+  background:rgba(0,0,0,0);
+  margin-top: 50px;
 }
 
 i.fa.fa-angle-down {
@@ -96,42 +117,10 @@ i.fa.fa-angle-down:hover {
   opacity: 1;
 }
 
-.tile__title {
-  position: absolute;
-  bottom: 0;
-  padding: 5px;
-  color: white;
-  background:rgba(0,0,0,0);
-  
-  max-width: 400px;
-  width: 100%;
-  text-align: left;
-  white-space: pre-wrap;      /* CSS3 */   
-  white-space: -moz-pre-wrap; /* Firefox */    
-  white-space: -pre-wrap;     /* Opera <7 */   
-  white-space: -o-pre-wrap;   /* Opera 7 */    
-  word-wrap: break-word;      /* IE */
-}
-
-.detailTitle {
-  font-size: 10px;
-  background:rgba(0,0,0,0);
-}
-
-.detailDetail {
-  font-size: 7px;
-  background:rgba(0,0,0,0);
-}
-
-
 .row__inner:hover {
   -webkit-transform: translate3d(-125px, 0, 0);
           transform: translate3d(-125px, 0, 0);
 }
-
-/*.row__inner:hover .tile {
-  opacity: 0.3;
-}*/
 
 .row__inner:hover .tile:first-child:hover {
   margin-left: 125px;
@@ -140,7 +129,6 @@ i.fa.fa-angle-down:hover {
 .row__inner:hover .tile:hover {
   -webkit-transform: scale(1.6);
           transform: scale(1.6);
-  /*opacity: 1;*/
 }
 
 .tile:hover ~ .tile {

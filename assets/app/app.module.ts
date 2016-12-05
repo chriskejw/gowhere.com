@@ -19,6 +19,8 @@ import { LogoutComponent } from "./auth/logout.component";
 import { ErrorComponent } from "./errors/error.component";
 import { MainComponent } from "./main/main.component";
 import { MainDetailComponent } from "./main/main-detail/main-detail.component";
+import { DropdownDirective } from './header/dropdown.directive';
+import { MyEventsComponent } from './my/my-events/my-events.component';
 
 // services
 import { AuthService } from "./auth/auth.service";
@@ -40,7 +42,9 @@ import { ActService } from "./acts/act.service";
         LogoutComponent,
         ErrorComponent,
         MainComponent,
-        MainDetailComponent
+        MainDetailComponent,
+        DropdownDirective,
+        MyEventsComponent
     ],
     imports: [
         BrowserModule,
