@@ -11,7 +11,8 @@
         </div>
         <div class="form-group">
             <label for="password">Password </label>
-            <span *ngIf="passwordchar > 0 && passwordchar < 6">(min char: {{passwordchar}})</span>
+            <span *ngIf="passwordchar > 0 && passwordchar < 6">(char left: {{passwordchar}})</span>
+            <span class="danger" *ngIf="passwordchar < -6">(max char: 12)</span>
             <input
                     type="password"
                     id="password"
@@ -37,7 +38,8 @@
         </div>
         <div class="form-group">
             <label for="username" id="hostname">{{usernameLabel}} </label>
-            <span *ngIf="usernamechar > 0 && usernamechar < 6">(min char: {{usernamechar}})</span>
+            <span *ngIf="usernamechar > 0 && usernamechar < 6">(char left: {{usernamechar}})</span>
+            <span class="danger" *ngIf="usernamechar < -24">(max char: 30)</span>
             <input
                     type="text"
                     id="username"
@@ -48,7 +50,7 @@
         <div class="form-group" *ngIf="(host)">
             <label for="hostcode">Host Code</label>
             <input
-                    type="text"
+                    type="password"
                     id="hostcode"
                     class="form-control"
                     formControlName="hostcode">

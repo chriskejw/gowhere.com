@@ -80,7 +80,7 @@ export class ActService {
                         act.websiteurl,
                         act.starttime,
                         act.endtime,
-                        act.user.firstName,
+                        act.user.username,
                         act._id,
                         act.user._id)
                     );

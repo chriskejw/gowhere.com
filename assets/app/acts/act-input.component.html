@@ -3,7 +3,7 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title">Title</label>
-            <span *ngIf="titlechar > 0 && titlechar < 6">(min char: {{titlechar}})</span>
+            <span *ngIf="titlechar > 0 && titlechar < 6">(char left: {{titlechar}})</span>
             <span class="danger" *ngIf="titlechar < -34">(max char: 40)</span>
             <input 
                 type="text"
@@ -30,8 +30,8 @@
         </div>
         <div class="form-group">
             <label for="details">Details</label>
-            <span *ngIf="detailschar > 0 && detailschar < 20">(min char: {{detailschar}})</span>
-            <span class="danger" *ngIf="detailschar < -80">(max char: 100)</span>
+            <span *ngIf="detailschar > 0 && detailschar < 50">(char left: {{detailschar}})</span>
+            <span class="danger" *ngIf="detailschar < -350">(max char: 400)</span>
             <textarea
                 rows="4"
                 placeholder="Describe the act"
@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <span>(jpg/png/jpeg)</span>
+            <span>( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <span>(jpg/png/jpeg)</span>
+            <span>( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -89,10 +89,9 @@
         </div>
         <div class="form-group">
             <label for="websiteurl">Website Url</label>
-            <span>(jpg/png/jpeg)</span>
             <input
                 type="text"
-                placeholder="Enter website url here"
+                placeholder="https://gowhere.com.sg"
                 id="websiteurl"
                 class="form-control"
                 formControlName="websiteurl"
@@ -102,19 +101,25 @@
             <label for="starttime">Start Time</label>
             <input
                 type="datetime-local"
+                [min]="mindateinput"
+                [max]="maxdateinput"
                 id="starttime"
                 class="form-control"
                 formControlName="starttime"
-                [ngModel]="act?.starttime">
+                [ngModel]="act?.starttime"
+                (keyup)='inputCounter()'>
         </div>
         <div class="form-group">
             <label for="endtime">End Time</label>
             <input
                 type="datetime-local"
+                [min]="mindateinput"
+                [max]="maxdateinput"
                 id="endtime"
                 class="form-control"
                 formControlName="endtime"
-                [ngModel]="act?.endtime">
+                [ngModel]="act?.endtime"
+                (keyup)='inputCounter()'>
         </div>
         <button 
                 type="button"
