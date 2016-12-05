@@ -4,7 +4,7 @@ import { AuthService } from "./auth.service";
 @Component({
     selector: 'app-authentication',
     template: `
-        <header class="row spacing">
+        <header class="row">
             <nav class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-tabs">
                     <li routerLinkActive="active" *ngIf="!isLoggedIn()"><a [routerLink]="['signup']">Signup</a></li>
@@ -13,7 +13,7 @@ import { AuthService } from "./auth.service";
                 </ul>
             </nav>
         </header>
-        <div class="row spacing">
+        <div class="row">
            <router-outlet></router-outlet>
         </div>
     `
