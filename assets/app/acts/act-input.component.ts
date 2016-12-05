@@ -1,8 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
+import { ErrorService } from "../errors/error.service";
 import { ActService } from "./act.service";
 import { Act } from "./act.model";
+
+import 'rxjs/Rx';
+import { Observable } from "rxjs";
 
 // acts.component > act-input.component
 // renders the act form using template driven form
@@ -34,59 +38,86 @@ export class ActInputComponent implements OnInit {
     titlechar: number;
     detailschar: number;
     capchar: number;
+    mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours() + 1)}:00:00`;
+    maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours() + 1)}:00:00`;
 
-    constructor(private actService: ActService) {
+    constructor(private actService: ActService, private errorService: ErrorService) {
         this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
                     "networking", "beauty", "home", "entertainment"]
     }
-
+    
     onSubmit() {
-        // if this.act is not null, means there is an act to edit
-        if (this.act) {
-            this.act.title = this.myForm.value.title;
-            this.act.category = this.myForm.value.category;
-            this.act.details = this.myForm.value.details;
-            this.act.address = this.myForm.value.address;
-            this.act.capacity = this.myForm.value.capacity;
-            this.act.picture = this.myForm.value.picture;
-            this.act.thumbnail = this.myForm.value.thumbnail;
-            this.act.websiteurl = this.myForm.value.websiteurl;
-            this.act.starttime = this.myForm.value.starttime;
-            this.act.endtime = this.myForm.value.endtime;
+        let startdate = new Date(this.myForm.value.starttime)
+        let enddate = new Date(this.myForm.value.endtime)
+        let plusOneHour = new Date(startdate.setHours(startdate.getHours() + 1))
+        let plusSixMonths = new Date(startdate.setMonth(startdate.getMonth() + 6))
 
-            // actService updateAct returns the updated act if successful
-            this.actService.updateAct(this.act)
-                .subscribe(
-                    result => {
-                        console.log(result),
-                        this.myForm.reset();
+        if (new Date(this.myForm.value.starttime) > enddate || enddate < plusOneHour || enddate > plusSixMonths) {
+            let error: any
+            if (new Date(this.myForm.value.starttime) > enddate || enddate < plusOneHour) {
+                error = { 
+                    'title': 'Invalid Date',
+                    'error': {
+                        'message': 'End time must be at least one hour after Start time.'
                     }
-                );
-            this.act = null;
+                }
+            }
+            if (enddate > plusSixMonths) {
+                error = { 
+                    'title': 'Invalid Date',
+                    'error': {
+                        'message': 'An event cannot be more than 6 months long.'
+                    }
+                }
+            }
+            this.errorService.handleError(error);
+            return Observable.throw(error);
         } else {
-            // create a new act
-            const act = new Act(
-                this.myForm.value.title,
-                this.myForm.value.category,
-                this.myForm.value.details,
-                this.myForm.value.address,
-                this.myForm.value.capacity,
-                this.myForm.value.picture,
-                this.myForm.value.thumbnail,
-                this.myForm.value.websiteurl,
-                this.myForm.value.starttime,
-                this.myForm.value.endtime,
-                'Max'
-            );
-            console.log(act)
-            this.actService.addAct(act)
-                .subscribe(
-                    data => {
-                        console.log(data)
-                        this.myForm.reset();
-                    },
-                    error => console.error(error)
+             // if this.act is not null, means there is an act to edit
+            if (this.act) {
+                this.act.title = this.myForm.value.title;
+                this.act.category = this.myForm.value.category;
+                this.act.details = this.myForm.value.details;
+                this.act.address = this.myForm.value.address;
+                this.act.capacity = this.myForm.value.capacity;
+                this.act.picture = this.myForm.value.picture;
+                this.act.thumbnail = this.myForm.value.thumbnail;
+                this.act.websiteurl = this.myForm.value.websiteurl;
+                this.act.starttime = this.myForm.value.starttime;
+                this.act.endtime = this.myForm.value.endtime;
+
+                // actService updateAct returns the updated act if successful
+                this.actService.updateAct(this.act)
+                    .subscribe(
+                        result => {
+                            console.log(result),
+                            this.myForm.reset();
+                        }
+                    );
+                this.act = null;
+            } else {
+                // create a new act
+                const act = new Act(
+                    this.myForm.value.title,
+                    this.myForm.value.category,
+                    this.myForm.value.details,
+                    this.myForm.value.address,
+                    this.myForm.value.capacity,
+                    this.myForm.value.picture,
+                    this.myForm.value.thumbnail,
+                    this.myForm.value.websiteurl,
+                    this.myForm.value.starttime,
+                    this.myForm.value.endtime
                 );
+                this.actService.addAct(act)
+                    .subscribe(
+                        data => {
+                            console.log(data)
+                            this.myForm.reset();
+                        },
+                        error => console.error(error)
+                    );
+            }
         }
     }
 
@@ -118,6 +149,31 @@ export class ActInputComponent implements OnInit {
             (act: Act) => this.act = act
         );
 
+        interface ValidationResult {
+            [key:string]:boolean;
+        }
+
+        class DateValidator {
+
+            static futureDate(formcontrol: FormControl): ValidationResult {
+                // convert to date with hour
+                // minus 8 hour from inputdate because of utc
+                let inputdate = new Date(formcontrol.value)
+                let now = new Date()
+                let inputdatetime = new Date(inputdate.setHours(inputdate.getHours() - 8))
+                let presentdatetime = new Date(now.setHours(now.getHours() + 1))
+                let futuredatetime = new Date(now.setFullYear(now.getFullYear() + 2))
+
+                // now + 1 hour < input date < now + 1 hour + 2 year
+                // if input doesn't fulfill criteria above, return future date true / error
+                if ( formcontrol.value && inputdatetime < presentdatetime || formcontrol.value && inputdatetime > futuredatetime) {
+                    return { "futureDate": true };
+                }
+                // input fulfills criteria
+                return null;
+            }
+        }
+
         // form validations
         this.myForm = new FormGroup({
             title: new FormControl(null, [
@@ -146,8 +202,14 @@ export class ActInputComponent implements OnInit {
             websiteurl: new FormControl(null, [
                 Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
             ]),
-            starttime: new FormControl(null),
-            endtime: new FormControl(null)
+            starttime: new FormControl(null, [
+                Validators.required,
+                DateValidator.futureDate
+            ]),
+            endtime: new FormControl(null, [
+                Validators.required,
+                DateValidator.futureDate
+            ])
         });
     }
 }
