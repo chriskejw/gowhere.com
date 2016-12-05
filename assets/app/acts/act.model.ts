@@ -9,7 +9,7 @@ export class Act {
     websiteurl: string;
     starttime: Date;
     endtime: Date;
-    username: string;
+    username?: string;
     actId?: string;
     userId?: string;
 
@@ -24,7 +24,7 @@ export class Act {
         websiteurl:string,
         starttime: Date,
         endtime: Date,
-        username: string,
+        username?: string,
         actId?: string,
         userId?: string) {
             this.title = title;

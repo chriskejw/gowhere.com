@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <span>(jpg/png/jpeg)</span>
+            <span>( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
-            <span>(jpg/png/jpeg)</span>
+            <span>( jpg/ png/ jpeg)</span>
             <input
                 type="text"
                 placeholder="https://image.png"
@@ -89,10 +89,9 @@
         </div>
         <div class="form-group">
             <label for="websiteurl">Website Url</label>
-            <span>(jpg/png/jpeg)</span>
             <input
                 type="text"
-                placeholder="Enter website url here"
+                placeholder="https://gowhere.com.sg"
                 id="websiteurl"
                 class="form-control"
                 formControlName="websiteurl"
@@ -102,19 +101,25 @@
             <label for="starttime">Start Time</label>
             <input
                 type="datetime-local"
+                [min]="mindateinput"
+                [max]="maxdateinput"
                 id="starttime"
                 class="form-control"
                 formControlName="starttime"
-                [ngModel]="act?.starttime">
+                [ngModel]="act?.starttime"
+                (keyup)='inputCounter()'>
         </div>
         <div class="form-group">
             <label for="endtime">End Time</label>
             <input
                 type="datetime-local"
+                [min]="mindateinput"
+                [max]="maxdateinput"
                 id="endtime"
                 class="form-control"
                 formControlName="endtime"
-                [ngModel]="act?.endtime">
+                [ngModel]="act?.endtime"
+                (keyup)='inputCounter()'>
         </div>
         <button 
                 type="button"

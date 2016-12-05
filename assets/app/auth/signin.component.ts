@@ -14,6 +14,7 @@ import { AuthService } from "./auth.service";
         }
         input.ng-invalid.ng-touched {
             border: 1px solid red;
+            color: darkred;
         }
     `]
 })
