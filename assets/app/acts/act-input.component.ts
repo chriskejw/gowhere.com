@@ -38,8 +38,8 @@ export class ActInputComponent implements OnInit {
     titlechar: number;
     detailschar: number;
     capchar: number;
-    mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours() + 1)}:00:00`;
-    maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours() + 1)}:00:00`;
+    mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
+    maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
 
     constructor(private actService: ActService, private errorService: ErrorService) {
         this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
@@ -54,6 +54,14 @@ export class ActInputComponent implements OnInit {
 
         if (new Date(this.myForm.value.starttime) > enddate || enddate < plusOneHour || enddate > plusSixMonths) {
             let error: any
+            if (new Date(this.myForm.value.starttime) < plusOneHour) {
+                error = { 
+                    'title': 'Invalid Date',
+                    'error': {
+                        'message': 'Start time must be an hour more than current time.'
+                    }
+                }
+            }
             if (new Date(this.myForm.value.starttime) > enddate || enddate < plusOneHour) {
                 error = { 
                     'title': 'Invalid Date',
@@ -133,7 +141,7 @@ export class ActInputComponent implements OnInit {
         if (this.myForm.value.title) {
             this.titlechar -= this.myForm.value.title.length
         }
-        this.detailschar = 20;
+        this.detailschar = 50;
         if (this.myForm.value.details) {
             this.detailschar -= this.myForm.value.details.length
         }
@@ -161,7 +169,7 @@ export class ActInputComponent implements OnInit {
                 let inputdate = new Date(formcontrol.value)
                 let now = new Date()
                 let inputdatetime = new Date(inputdate.setHours(inputdate.getHours() - 8))
-                let presentdatetime = new Date(now.setHours(now.getHours() + 1))
+                let presentdatetime = new Date(now.setHours(now.getHours()))
                 let futuredatetime = new Date(now.setFullYear(now.getFullYear() + 2))
 
                 // now + 1 hour < input date < now + 1 hour + 2 year
@@ -184,8 +192,8 @@ export class ActInputComponent implements OnInit {
             category: new FormControl(null, Validators.required),
             details: new FormControl(null, [
                 Validators.required,
-                Validators.minLength(20),
-                Validators.maxLength(100)
+                Validators.minLength(50),
+                Validators.maxLength(400)
             ]),
             address: new FormControl(null, Validators.required),
             capacity: new FormControl(null, [
