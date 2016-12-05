@@ -1,15 +1,32 @@
-<div class="popDown">
+<article class="popDown">
     
-    <div class="col-9 col-m-9 leftImage">
-        <img class="col-9 col-m-9" src ="http://www.skiheavenly.com/~/media/heavenly/images/732x260%20header%20images/events-heavenly-header.ashx" alt="some description"/>
-    </div>
-
+    <!--<img class="tile__img" src="{{act.imagePath}}" alt=""  />-->
+    <img src ="http://www.skiheavenly.com/~/media/heavenly/images/732x260%20header%20images/events-heavenly-header.ashx" alt="some description"/>
+    
     <i class="fa fa-times close" aria-hidden="true" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'></i>
 
-    <div class="col-3 col-m-3 rightDetail">
+    <div class="rightDetail">
+        <!--{{act.title}}--> <!--{{act.title}}-->
         <h3 class="title">Party Like There Is No Tomorrow</h3>
-        <h4 class="urlLink">www.google.com</h4>
-        <p class="description">OI OI OI description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etcthis is a short description yada yada peanuts etc </p>
+        
+        <br>
+
+        <!--{{act.title}}--> <!--{{act.description}}-->
+        <p class="description">This is a good event. This is a very good event. People who come to this event will really enjoy it.This is a good event. This is a very good event. People who come to this event will really enjoy it.This is a good event. This is a very good event. People who come to this event will really enjoy it.This is a good event. This is a very good event. People who come to this event will really enjoy it.</p>
+    
+        <br>
+
+        <!--{{act.title}}--> <!--{{act.websiteURL}}-->
+        <p class="urlLink"><a class="link"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;www.google.com</a></p>
+
+        <p><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;8 Claymore Hill</p>
+
+        <p><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;4pm</p>
+
+        <br>
+
+        <button class='btn btn-success'>Join Event</button>
+    
     </div>
 
-</div>
+</article>
