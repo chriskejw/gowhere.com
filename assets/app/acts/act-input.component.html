@@ -3,7 +3,7 @@
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title">Title</label>
-            <span *ngIf="titlechar > 0 && titlechar < 6">(min char: {{titlechar}})</span>
+            <span *ngIf="titlechar > 0 && titlechar < 6">(char left: {{titlechar}})</span>
             <span class="danger" *ngIf="titlechar < -34">(max char: 40)</span>
             <input 
                 type="text"
@@ -30,8 +30,8 @@
         </div>
         <div class="form-group">
             <label for="details">Details</label>
-            <span *ngIf="detailschar > 0 && detailschar < 20">(min char: {{detailschar}})</span>
-            <span class="danger" *ngIf="detailschar < -80">(max char: 100)</span>
+            <span *ngIf="detailschar > 0 && detailschar < 50">(char left: {{detailschar}})</span>
+            <span class="danger" *ngIf="detailschar < -350">(max char: 400)</span>
             <textarea
                 rows="4"
                 placeholder="Describe the act"
