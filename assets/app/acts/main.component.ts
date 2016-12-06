@@ -9,14 +9,9 @@ import { Act } from '../acts/act.model';
     styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-    act: Act;
-    acts: Act [] = [];
+    acts: Act[];
+
     constructor(private actService: ActService) {}
-    
-    showDetails(act: Act) {
-        this.act = act;
-        alert(this.act.title);
-    }
 
     ngOnInit() {
         // on init, get all the acts from the db
