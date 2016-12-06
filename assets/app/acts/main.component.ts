@@ -9,19 +9,19 @@ import { Act } from '../acts/act.model';
     styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-    // acts: Act[];
+    acts: Act[];
 
-    // constructor(private actService: ActService) {}
+    constructor(private actService: ActService) {}
 
     ngOnInit() {
-        // // on init, get all the acts from the db
-        // this.actService.getActs()
-        //     // actService getActs function returns an array of all acts and stores in the local database
-        //     .subscribe(
-        //         (acts: Act[]) => {
-        //             this.acts = acts;
-        //         }
-        //     );
+        // on init, get all the acts from the db
+        this.actService.getActs()
+            // actService getActs function returns an array of all acts and stores in the local database
+            .subscribe(
+                (acts: Act[]) => {
+                    this.acts = acts;
+                }
+            );
     }
 
 }

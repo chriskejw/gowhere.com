@@ -1,7 +1,14 @@
-<!--<act-thumbnail [act]="act" *ngFor="let act of acts"></act-thumbnail>-->
+<div class="containScroll">
 
-<act-thumbnail></act-thumbnail>
+  <h3>Trending</h3>
 
+  <div class="row">
+    <div class="row__inner">
+      <act-thumbnail [act]="act" *ngFor="let act of acts"></act-thumbnail>
+    </div>
+  </div>
+
+</div>
 
 <act-detail></act-detail>
 
