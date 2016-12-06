@@ -1,0 +1,111 @@
+.popDown {
+    margin-top: 10px;
+    width: 100%;
+    height: 400px;
+    color: white;
+}
+
+article img {
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+}
+
+.rightDetail {
+    margin-left: 60%;
+    padding: 1%;
+}
+
+.title, .description {
+    padding: 0;
+    margin: 0;
+}
+
+a.link {
+    color: white;
+    text-decoration: none;
+}
+
+a.link:hover {
+    color: #a2a2a0;
+    cursor: pointer; cursor: hand;
+    text-decoration: none;
+}
+
+.close {
+    color: white;
+    float: right;
+    display:inline-block;
+    text-decoration: none;
+    padding: 1%;
+    font-size: 22px;
+}
+
+@media screen and (min-width:600px) {
+  article img {
+    float: left;
+    width: 60%;
+    height: 400px;
+  }
+  
+  .rightDetail {
+    margin-left: 60%;
+  }
+}
+
+@media screen and (max-width:599px) {
+
+    .popDown {
+        height: 100%;
+    }
+
+    article img {
+        width:100%;
+        margin-bottom: 10px;
+    }
+
+    .rightDetail {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*.popDown {
+    border: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    height: 400px;
+}
+
+.imageLeft { 
+    float: left;
+    margin-right: 0.5%;
+}
+
+.rightDetail {
+    float: right;
+}
+
+.title, .urlLink, .description {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+.close {
+    color:white;
+    float: right;
+    display:inline-block;
+    padding:2px 5px;
+    font-size: 20px;
+}*/

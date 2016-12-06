@@ -6,7 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ActsComponent} from './acts/acts.component';
 import {AuthenticationComponent} from './auth/authentication.component';
 import {AUTH_ROUTES} from './auth/auth.routes';
-import {MainComponent} from './main/main.component';
+import {MainComponent} from './acts/main.component';
 
 // array of angular routes
 const APP_ROUTES: Routes = [

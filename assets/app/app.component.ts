@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { MainComponent } from './main/main.component';
+import { MainComponent } from './acts/main.component';
 
 // why actService in appcomponent! REFACTOR
 @Component({

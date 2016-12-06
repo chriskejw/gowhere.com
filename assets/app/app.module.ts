@@ -16,11 +16,11 @@ import { AuthenticationComponent } from "./auth/authentication.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
 import { ErrorComponent } from "./errors/error.component";
-import { MainComponent } from "./main/main.component";
-import { MainDetailComponent } from "./main/main-detail/main-detail.component";
+import { MainComponent } from "./acts/main.component";
+import { ActDetailComponent } from "./acts/act-detail/act-detail.component";
 import { DropdownDirective } from './header/dropdown.directive';
 import { MyEventsComponent } from './my/my-events/my-events.component';
-import { MainThumbnailComponent } from './main/main-thumbnail/main-thumbnail.component';
+import { ActThumbnailComponent } from './acts/act-thumbnail/act-thumbnail.component';
 
 // services
 import { AuthService } from "./auth/auth.service";
@@ -41,10 +41,10 @@ import { ActService } from "./acts/act.service";
         SigninComponent,
         ErrorComponent,
         MainComponent,
-        MainDetailComponent,
+        ActDetailComponent,
         DropdownDirective,
         MyEventsComponent,
-        MainThumbnailComponent
+        ActThumbnailComponent
     ],
     imports: [
         BrowserModule,
