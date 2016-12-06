@@ -19,9 +19,9 @@ export class ActDetailComponent implements OnInit {
         alert('test')
     }
 
-    @Input() selectedAct: Act;
+    // @Input() selectedAct: Act;
     
-    @Input() act: Act;
+    // @Input() act: Act;
   
 
     ngOnInit () {

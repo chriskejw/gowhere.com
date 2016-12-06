@@ -9,11 +9,11 @@ import { ActService } from '../../acts/act.service'
     styleUrls: ['./act-thumbnail.component.css']
 })
 export class ActThumbnailComponent implements OnInit {
-    acts: Act [] = []
+    // acts: Act [] = []
     
-    constructor(private actService: ActService) { }
+    // constructor(private actService: ActService) { }
     
     ngOnInit() {
-        this.acts = this.actService.getActs();
+    //     this.acts = this.actService.getActs();
     }
 }
