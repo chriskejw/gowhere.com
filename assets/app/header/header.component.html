@@ -15,7 +15,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()">
         <!--<li routerLinkActive="active"><a [routerLink]="['/acts']">Create Event</a></li>-->
         <!--<li routerLinkActive="active"><a [routerLink]="['/auth']">Authentication</a></li>-->
         <li routerLinkActive="active"><a [routerLink]="['/signup']">Sign Up</a></li>
@@ -24,14 +24,14 @@
 
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()">
         <li class="dropdown" rbDropdown>
           <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a [routerLink]="['/myevents']">My Events <span class="badge">5</span></a></li>
-            <li><a [routerLink]="['/acts']">Create Event</a></li>
+            <li><a [routerLink]="['/acts']" *ngIf="isAHost()">Create Event</a></li>
             <li role="separator" class="divider"></li>
-            <li><a [routerLink]="['/logout']">Logout</a></li>
+            <li><a (click)="onLogout()">Logout</a></li>
           </ul>
         </li>
       </ul>

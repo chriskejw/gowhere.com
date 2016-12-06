@@ -16,7 +16,7 @@ export class AuthService {
     // posts to the node /user post route to save the user
     signup(user: User) {
         // converts the user credentials into JSON string
-        // set header to receive data in JSON format 
+        // set header to receive data in JSON format
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
 
@@ -52,5 +52,10 @@ export class AuthService {
     // checks if a user is logged in, using local storage token
     isLoggedIn() {
         return localStorage.getItem('token') !== null;
+    }
+
+    // checks if a user is a host, using local storage token
+    isHost() {
+        return localStorage.getItem('userType') === 'host';
     }
 }

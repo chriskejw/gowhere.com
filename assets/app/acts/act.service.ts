@@ -139,4 +139,8 @@ export class ActService {
                 return Observable.throw(error.json());
             });
     }
+
+    joinAct(act: Act) {
+        
+    }
 }

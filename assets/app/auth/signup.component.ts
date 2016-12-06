@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import { AuthService } from "./auth.service";
 import { User } from "./user.model";
@@ -30,7 +31,7 @@ export class SignupComponent implements OnInit {
     passwordchar: number;
     usernamechar: number;
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     // when signup submit button clicked, create a new user using the form's values
     // run authService function 'signup' which posts the variable 'user' to node for saving
@@ -47,8 +48,14 @@ export class SignupComponent implements OnInit {
         // .subscribe(success, error, complete), not using complete
         this.authService.signup(user)
             .subscribe(
+                // on successful signin, store the response in the localStorage as a token
+                // redirect to '/' route
                 data => {
                     console.log(data)
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userType', data.userType);
+                    this.router.navigateByUrl('/');
                     this.myForm.reset();
                 },
                 error => console.error(error)
@@ -57,6 +64,12 @@ export class SignupComponent implements OnInit {
 
     // FormGroup quite heavy so not used in the constructor
     ngOnInit() {
+
+        // authService function isLoggedIn, checks for token in localstorage and returns boolean
+        // if true, show route to homepage
+        if (this.authService.isLoggedIn()) {
+            this.router.navigateByUrl('/');
+        }
         /** example of a reactive (data-driven) form
         * this form tells ng not to autodetect and create the form for us, but use our form instead
         *

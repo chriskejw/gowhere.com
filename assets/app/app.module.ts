@@ -15,7 +15,6 @@ import { ActsComponent } from "./acts/acts.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
-import { LogoutComponent } from "./auth/logout.component";
 import { ErrorComponent } from "./errors/error.component";
 import { MainComponent } from "./main/main.component";
 import { MainDetailComponent } from "./main/main-detail/main-detail.component";
@@ -39,7 +38,6 @@ import { ActService } from "./acts/act.service";
         AuthenticationComponent,
         SignupComponent,
         SigninComponent,
-        LogoutComponent,
         ErrorComponent,
         MainComponent,
         MainDetailComponent,
