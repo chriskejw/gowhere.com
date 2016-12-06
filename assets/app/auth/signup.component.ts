@@ -48,8 +48,14 @@ export class SignupComponent implements OnInit {
         // .subscribe(success, error, complete), not using complete
         this.authService.signup(user)
             .subscribe(
+                // on successful signin, store the response in the localStorage as a token
+                // redirect to '/' route
                 data => {
                     console.log(data)
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userType', data.userType);
+                    this.router.navigateByUrl('/');
                     this.myForm.reset();
                 },
                 error => console.error(error)
@@ -62,7 +68,7 @@ export class SignupComponent implements OnInit {
         // authService function isLoggedIn, checks for token in localstorage and returns boolean
         // if true, show route to homepage
         if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/']);
+            this.router.navigateByUrl('/');
         }
         /** example of a reactive (data-driven) form
         * this form tells ng not to autodetect and create the form for us, but use our form instead

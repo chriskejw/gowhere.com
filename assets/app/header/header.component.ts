@@ -19,6 +19,10 @@ export class HeaderComponent {
     isLoggedIn() {
         return this.authService.isLoggedIn();
     }
+    isAHost() {
+        return this.authService.isHost();
+    }
+
     // authService function onLogout clears the token in local storage and redirects to /auth/signin
     onLogout() {
         this.authService.logout();

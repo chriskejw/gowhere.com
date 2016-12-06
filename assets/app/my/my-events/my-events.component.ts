@@ -15,7 +15,7 @@ export class MyEventsComponent implements OnInit {
         // authService function isLoggedIn, checks for token in localstorage and returns boolean
         // if false, means not login, show route to homepage
         if (!this.authService.isLoggedIn()) {
-            this.router.navigate(['/']);
+            this.router.navigateByUrl('/');
         }
     }
 }

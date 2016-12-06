@@ -38,6 +38,7 @@ export class SigninComponent {
                 data => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userType', data.userType);
                     this.router.navigateByUrl('/');
                     this.myForm.reset();
                 },
@@ -53,7 +54,7 @@ export class SigninComponent {
         // authService function isLoggedIn, checks for token in localstorage and returns boolean
         // if true, show route to homepage
         if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/']);
+            this.router.navigateByUrl('/');
         }
         // refer to SIGNUP component for a better understanding of FormGroup, FormControl, validators
         this.myForm = new FormGroup({

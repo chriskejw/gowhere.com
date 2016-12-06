@@ -34,9 +34,24 @@ router.post('/', function (req, res, next) {
                         error: { message: 'Unable to create new user.' }
                     });
                 }
+
+                 // if success, respond with token, and user id
+                 /**
+                 * generates and signs a new token
+                 * format of sign, .sign(payload, secret, {expiry: inseconds})
+                 * @param  payload is a javascript object where we can store any value
+                 * @param  secret accepts a string, anything you want
+                 * @param  7200 seconds, 2 hours!
+                 */
+                var token = jwt.sign({user: result}, 'secret', {expiresIn: 7200});
+
+                // if success, respond with token, and user id
                 res.status(201).json({
                     message: 'User created',
-                    obj: result
+                    obj: result,
+                    token: token,
+                    userId: user.username,
+                    userType: user.usertype
                 });
             });
         } else {
@@ -80,11 +95,11 @@ router.post('/signin', function(req, res, next) {
          */
         var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
 
-        // if success, respond with act, token, and user id
+        // if success, respond with token, and user id
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
-            userId: user._id,
+            userId: user.username,
             userType: user.usertype
         });
     });

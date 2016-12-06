@@ -53,4 +53,9 @@ export class AuthService {
     isLoggedIn() {
         return localStorage.getItem('token') !== null;
     }
+
+    // checks if a user is a host, using local storage token
+    isHost() {
+        return localStorage.getItem('userType') === 'host';
+    }
 }
