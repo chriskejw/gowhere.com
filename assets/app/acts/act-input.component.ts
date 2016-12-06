@@ -16,6 +16,9 @@ import { Observable } from "rxjs";
     selector: 'app-act-input',
     templateUrl: './act-input.component.html',
     styles: [`
+        h3 {
+            color: white;
+        }
         label, span {
             color: white;
         }
@@ -30,6 +33,9 @@ import { Observable } from "rxjs";
         span.danger {
             color: #D23029;
         }
+        article.popDown img {
+            margin-bottom: 30px;
+        }
     `]
 })
 
@@ -40,6 +46,8 @@ export class ActInputComponent implements OnInit {
     titlechar: number;
     detailschar: number;
     capchar: number;
+    pictureinput: string;
+    thumbnailinput: string;
     mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
     maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
 
@@ -154,6 +162,8 @@ export class ActInputComponent implements OnInit {
         if (this.myForm.value.capacity) {
             this.capchar = this.myForm.value.capacity
         }
+        this.pictureinput = this.myForm.value.picture
+        this.thumbnailinput = this.myForm.value.thumbnail
     }
 
     ngOnInit() {

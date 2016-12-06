@@ -4,60 +4,38 @@
 
 
         <div class="col-md-5">
-            <!--<img class="tile__img" src="{{act.imagePath}}" alt=""  />-->
-            <img class="col-md-12" src ="http://www.skiheavenly.com/~/media/heavenly/images/732x260%20header%20images/events-heavenly-header.ashx" alt="act image preview"/>
+            <h3>Act Picture</h3>
+            <img class="col-md-12" src='{{pictureinput}}' alt="act image preview"/>
 
             <br>
 
-            <div class="form-group">
+            <h3>Act Thumbnail</h3>
+            <img class="col-md-6" src ="{{thumbnailinput}}" alt="act thumbnail preview"/>
+
+            <div class="col-md-6 form-group">
                 <input
                     type="text"
                     placeholder="Picture url (jpg/ png/ jpeg)"
                     id="picture"
                     class="form-control"
                     formControlName="picture"
-                    [ngModel]="act?.picture">
+                    [ngModel]="act?.picture"
+                    (keyup)='inputCounter()'>
             </div>
 
             <br>
 
-            <div class="form-group">
+            <div class="col-md-6 form-group">
                 <input
                     type="text"
                     placeholder="Thumbnail url (jpg/ png/ jpeg)"
                     id="thumbnail"
                     class="form-control"
                     formControlName="thumbnail"
-                    [ngModel]="act?.thumbnail">
+                    [ngModel]="act?.thumbnail"
+                    (keyup)='inputCounter()'>
             </div>
-
-            <br>
             
-            <div class="col-md-6 form-group">
-                <label for="starttime">Start Time</label>
-                <input
-                    type="datetime-local"
-                    [min]="mindateinput"
-                    [max]="maxdateinput"
-                    id="starttime"
-                    class="form-control"
-                    formControlName="starttime"
-                    [ngModel]="act?.starttime"
-                    (keyup)='inputCounter()'>
-            </div>
-
-            <div class="col-md-6 form-group">
-                <label for="endtime">End Time</label>
-                <input
-                    type="datetime-local"
-                    [min]="mindateinput"
-                    [max]="maxdateinput"
-                    id="endtime"
-                    class="form-control"
-                    formControlName="endtime"
-                    [ngModel]="act?.endtime"
-                    (keyup)='inputCounter()'>
-            </div>
         </div>
         
 
@@ -145,7 +123,33 @@
                     (keyup)='inputCounter()'>
             </div>
 
-            <br>
+            <div class="col-md-6 form-group">
+                <label for="starttime">Start Time</label>
+                <input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="starttime"
+                    class="form-control"
+                    formControlName="starttime"
+                    [ngModel]="act?.starttime"
+                    (keyup)='inputCounter()'>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label for="endtime">End Time</label>
+                <input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="endtime"
+                    class="form-control"
+                    formControlName="endtime"
+                    [ngModel]="act?.endtime"
+                    (keyup)='inputCounter()'>
+            </div>
+
+            <br><br>
 
             <button 
                     type="button"
