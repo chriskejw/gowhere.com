@@ -8,10 +8,7 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { routing } from "./app.routing";
-import { ActComponent } from "./acts/act.component";
-import { ActListComponent } from "./acts/act-list.component";
 import { ActInputComponent } from "./acts/act-input.component";
-import { ActsComponent } from "./acts/acts.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
@@ -31,10 +28,7 @@ import { ActService } from "./acts/act.service";
         AppComponent,
         HeaderComponent,
         FooterComponent,
-        ActComponent,
-        ActListComponent,
         ActInputComponent,
-        ActsComponent,
         AuthenticationComponent,
         SignupComponent,
         SigninComponent,
