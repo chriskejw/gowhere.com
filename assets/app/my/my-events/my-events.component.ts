@@ -11,6 +11,10 @@ import { AuthService } from "../../auth/auth.service";
 export class MyEventsComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router) {}
 
+    isAHost() {
+        return this.authService.isHost();
+    }
+
     ngOnInit() {
         // authService function isLoggedIn, checks for token in localstorage and returns boolean
         // if false, means not login, show route to homepage

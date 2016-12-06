@@ -1,7 +1,7 @@
 <div class="containScroll">
 
-<h3 class="col-md-3">Events Joined: 5</h3>
-<h3 class="col-md-3">Events Created: 5</h3>  
+<h3 class="col-md-3" *ngIf="!isAHost()">Events Joined: 5</h3>
+<h3 class="col-md-3" *ngIf="isAHost()">Events Created: 5</h3>  
 
 <div class="container-fluid">
     <div class="row" id="nav-row">
@@ -125,8 +125,9 @@
 
         <br>
 
-        <button class='btn btn-primary'>Edit Event</button>
-    
+        <button class='btn btn-primary' *ngIf="!isAHost()">View Event</button>
+        <button class='btn btn-primary' *ngIf="isAHost()">Edit Event</button>
+
     </div>
 
 </article>
