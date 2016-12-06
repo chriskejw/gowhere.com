@@ -49,6 +49,12 @@ export class SigninComponent {
 
     // FormGroup quite heavy so not used in the constructor
     ngOnInit() {
+
+        // authService function isLoggedIn, checks for token in localstorage and returns boolean
+        // if true, show route to homepage
+        if (this.authService.isLoggedIn()) {
+            this.router.navigate(['/']);
+        }
         // refer to SIGNUP component for a better understanding of FormGroup, FormControl, validators
         this.myForm = new FormGroup({
             email: new FormControl(null, [
