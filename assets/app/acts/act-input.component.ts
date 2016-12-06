@@ -3,7 +3,9 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { ErrorService } from "../errors/error.service";
 import { ActService } from "./act.service";
+import { AuthService } from "../auth/auth.service";
 import { Act } from "./act.model";
+import { Router } from "@angular/router";
 
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
@@ -26,7 +28,7 @@ import { Observable } from "rxjs";
             color: darkred;
         }
         span.danger {
-            color: red;
+            color: #D23029;
         }
     `]
 })
@@ -41,10 +43,14 @@ export class ActInputComponent implements OnInit {
     mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
     maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
 
-    constructor(private actService: ActService, private errorService: ErrorService) {
-        this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
+    constructor(
+        private actService: ActService,
+        private authService: AuthService,
+        private errorService: ErrorService,
+        private router: Router) {
+            this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
                     "networking", "beauty", "home", "entertainment"]
-    }
+        }
     
     onSubmit() {
         let startdate = new Date(this.myForm.value.starttime)
@@ -151,6 +157,12 @@ export class ActInputComponent implements OnInit {
     }
 
     ngOnInit() {
+        // authService function isLoggedIn, checks for token in localstorage and returns boolean
+        // if false, means not login, show route to homepage
+        if (!this.authService.isHost()) {
+            this.router.navigateByUrl('/');
+        }
+
         // listening to actService's event emitter which activates when edit pressed
         // this.act values are placed in the form because of [ngModel] in the html
         this.actService.actIsEdit.subscribe(

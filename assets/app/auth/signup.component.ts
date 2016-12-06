@@ -17,7 +17,7 @@ import { User } from "./user.model";
             color: darkred;
         }
         span.danger {
-            color: red;
+            color: #D23029;
         }
     `]
 })
