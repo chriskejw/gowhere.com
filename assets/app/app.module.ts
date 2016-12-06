@@ -20,6 +20,7 @@ import { MainComponent } from "./main/main.component";
 import { MainDetailComponent } from "./main/main-detail/main-detail.component";
 import { DropdownDirective } from './header/dropdown.directive';
 import { MyEventsComponent } from './my/my-events/my-events.component';
+import { MainThumbnailComponent } from './main/main-thumbnail/main-thumbnail.component';
 
 // services
 import { AuthService } from "./auth/auth.service";
@@ -42,7 +43,8 @@ import { ActService } from "./acts/act.service";
         MainComponent,
         MainDetailComponent,
         DropdownDirective,
-        MyEventsComponent
+        MyEventsComponent,
+        MainThumbnailComponent
     ],
     imports: [
         BrowserModule,
