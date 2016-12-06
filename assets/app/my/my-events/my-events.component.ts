@@ -9,10 +9,16 @@ import { AuthService } from "../../auth/auth.service";
     styleUrls: ['./my-events.component.css']
 })
 export class MyEventsComponent implements OnInit {
+    editboolean: boolean = false;
+    
     constructor(private authService: AuthService, private router: Router) {}
 
     isAHost() {
         return this.authService.isHost();
+    }
+
+    editClick (boolean: boolean) {
+        this.editboolean = boolean;
     }
 
     ngOnInit() {
