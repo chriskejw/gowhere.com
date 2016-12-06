@@ -1,51 +1,29 @@
-// this is the central data storage!
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Recipe} from './recipe';
-import {Ingredient} from '../ingredient';
+import { Main } from '../main';
 
 @Injectable()
-export class RecipeService {
-private recipes: Recipe[] = [
+export class ActService {
+private acts: Main[] = [
 
-    new Recipe('Char Kuay Teow',
-    'Very Shiok!',
+    new Main('Takshimaya Sale', 
     'http://sethlui.com/wp-content/uploads/2016/01/zion-road-char-kway-teow.jpg',
-    [
-    new Ingredient('Kuay Teow', 1),
-    new Ingredient('Lup Cheong', 1)
-    ]),
+    'very good sale'),
 
-    new Recipe('Nasi Lemak',
-    'Mmm...Sedap!',
-    'https://www.purelyb.com/images/easyblog_shared/2e1ax_content_entry_blog-Nasi-Lemak-A-Traditional-Mala-119568677-1.jpg',
-    [
-    new Ingredient('Steamed Coconut Rice', 1),
-    new Ingredient('Ikan Bilis', 1)
-    ])
+    new Main('Takshimaya Sale',
+    'http://sethlui.com/wp-content/uploads/2016/01/zion-road-char-kway-teow.jpg',
+    'very bad sale'),
 
-  ];
+];
 
-  constructor() { }
+constructor() { }
 
-  getRecipes() {
-    return this.recipes;
-  }
+getActs() {
+    return this.acts;
+}
 
-  getRecipe(id: number) {
-    return this.recipes[id];
-  }
-
-  deleteRecipe(recipe: Recipe) { // --> will remove the one that is passed here
-    this.recipes.splice(this.recipes.indexOf(recipe), 1); // --> remove one recipe
-  }
-
-  addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-  }
-
-  editRecipe(oldRecipe: Recipe, newRecipe: Recipe) {
-    this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
-  }
+getAct(id:number) {
+    return this.acts[id];
+}
 
 }

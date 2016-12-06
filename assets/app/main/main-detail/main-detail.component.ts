@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Act } from '../../acts/act.model';
 
 // why actService in appcomponent! REFACTOR
 @Component({
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
     templateUrl: './main-detail.component.html',
     styleUrls: ['./main-detail.component.css']
 })
-export class MainDetailComponent {
+export class MainDetailComponent implements OnInit {
+    @Input() selectedAct: Act;
+    
+    @Input() act: Act;
+  
+
+    ngOnInit () {
+
+    }
 }
