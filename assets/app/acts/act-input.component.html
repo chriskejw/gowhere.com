@@ -4,24 +4,8 @@
 
 
         <div class="col-md-5">
-            <h3>Act Picture</h3>
-            <img class="col-md-12" src='{{pictureinput}}' alt="act image preview"/>
-
-            <br>
-
             <h3>Act Thumbnail</h3>
             <img class="col-md-6" src ="{{thumbnailinput}}" alt="act thumbnail preview"/>
-
-            <div class="col-md-6 form-group">
-                <input
-                    type="text"
-                    placeholder="Picture url (jpg/ png/ jpeg)"
-                    id="picture"
-                    class="form-control"
-                    formControlName="picture"
-                    [ngModel]="act?.picture"
-                    (keyup)='inputCounter()'>
-            </div>
 
             <br>
 
