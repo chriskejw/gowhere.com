@@ -10,9 +10,7 @@ import { Act } from '../../acts/act.model'
 export class ActThumbnailComponent {
     @Input() act: Act;
 
-    // startDate: Date;
-    
-    // constructor() {
-    //     this.startDate = new Date(this.act.starttime)
-    // }
+    joinAct() {
+        alert('joining');
+    }
 }
