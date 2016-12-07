@@ -17,7 +17,7 @@ const APP_ROUTES: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'myevents', component: MyEventsComponent },
     // auth route has children routes eg. auth/login or auth/signup
-    { path: 'auth', component: AuthenticationComponent, children: AUTH_ROUTES }
+    { path: 'auth', component: AuthenticationComponent }
     
 ];
 

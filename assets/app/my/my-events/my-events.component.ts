@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { AuthService } from "../../auth/auth.service";
+import { Act } from '../../acts/act.model';
 
 @Component({
     selector: 'my-events',
@@ -9,6 +10,9 @@ import { AuthService } from "../../auth/auth.service";
     styleUrls: ['./my-events.component.css']
 })
 export class MyEventsComponent implements OnInit {
+
+    @Input() act: Act;
+
     editboolean: boolean = false;
     
     constructor(private authService: AuthService, private router: Router) {}

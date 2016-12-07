@@ -14,7 +14,7 @@ import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
 import { ErrorComponent } from "./errors/error.component";
 import { MainComponent } from "./acts/main.component";
-import { ActDetailComponent } from "./acts/act-detail/act-detail.component";
+import { MyEventsDetailComponent } from "./my/my-events/my-events-detail/my-events-detail.component";
 import { DropdownDirective } from './header/dropdown.directive';
 import { MyEventsComponent } from './my/my-events/my-events.component';
 import { ActThumbnailComponent } from './acts/act-thumbnail/act-thumbnail.component';
@@ -35,7 +35,7 @@ import { ActService } from "./acts/act.service";
         SigninComponent,
         ErrorComponent,
         MainComponent,
-        ActDetailComponent,
+        MyEventsDetailComponent,
         DropdownDirective,
         MyEventsComponent,
         ActThumbnailComponent
