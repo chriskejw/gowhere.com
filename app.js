@@ -14,7 +14,10 @@ var userRoutes = require('./routes/user');
 
 // mongoose connect to mongodb
 var app = express();
+
+// switch between test and prod
 mongoose.connect('localhost:27017/node-angular');
+// mongoose.connect('wdi6-alex:123456@ds127878.mlab.com:27878/gowhere');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

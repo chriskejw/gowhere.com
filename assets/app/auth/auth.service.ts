@@ -11,6 +11,11 @@ import { ErrorService } from "../errors/error.service";
 // @Injectable, adds some metadata so http able to inject service into AuthService Class
 @Injectable()
 export class AuthService {
+
+    // variable for changing between test and prod
+    environment: string = "http://localhost:3000";
+    // environment: string = "https://gowhere-wdi6.herokuapp.com";
+
     constructor(private http: Http, private errorService: ErrorService) {}
 
     // posts to the node /user post route to save the user
@@ -21,7 +26,7 @@ export class AuthService {
         const headers = new Headers({'Content-Type': 'application/json'});
 
         // returns an observable
-        return this.http.post('http://localhost:3000/user', body, {headers: headers})
+        return this.http.post(`${this.environment}/user`, body, {headers: headers})
             // map operator returns an observable by default, so no need 'Observable.'
             .map((response: Response) => response.json())
             // catch by default does not return an observable automatically,
@@ -36,7 +41,7 @@ export class AuthService {
     signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
+        return this.http.post(`${this.environment}/user/signin`, body, {headers: headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
