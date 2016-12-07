@@ -42,11 +42,8 @@ import { Observable } from "rxjs";
 export class ActInputComponent implements OnInit {
     myForm: FormGroup;
     act: Act;
-    categories: string[];
     titlechar: number;
     detailschar: number;
-    capchar: number;
-    pictureinput: string;
     thumbnailinput: string;
     mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
     maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
@@ -55,10 +52,7 @@ export class ActInputComponent implements OnInit {
         private actService: ActService,
         private authService: AuthService,
         private errorService: ErrorService,
-        private router: Router) {
-            this.categories = ["eat", "drink", "fashion", "sports", "music", "art",
-                    "networking", "beauty", "home", "entertainment"]
-        }
+        private router: Router) {}
     
     onSubmit() {
         let startdate = new Date(this.myForm.value.starttime)
@@ -95,51 +89,24 @@ export class ActInputComponent implements OnInit {
             this.errorService.handleError(error);
             return Observable.throw(error);
         } else {
-             // if this.act is not null, means there is an act to edit
-            if (this.act) {
-                this.act.title = this.myForm.value.title;
-                this.act.category = this.myForm.value.category;
-                this.act.details = this.myForm.value.details;
-                this.act.address = this.myForm.value.address;
-                this.act.capacity = this.myForm.value.capacity;
-                this.act.picture = this.myForm.value.picture;
-                this.act.thumbnail = this.myForm.value.thumbnail;
-                this.act.websiteurl = this.myForm.value.websiteurl;
-                this.act.starttime = this.myForm.value.starttime;
-                this.act.endtime = this.myForm.value.endtime;
-
-                // actService updateAct returns the updated act if successful
-                this.actService.updateAct(this.act)
-                    .subscribe(
-                        result => {
-                            console.log(result),
-                            this.myForm.reset();
-                        }
-                    );
-                this.act = null;
-            } else {
-                // create a new act
-                const act = new Act(
-                    this.myForm.value.title,
-                    this.myForm.value.category,
-                    this.myForm.value.details,
-                    this.myForm.value.address,
-                    this.myForm.value.capacity,
-                    this.myForm.value.picture,
-                    this.myForm.value.thumbnail,
-                    this.myForm.value.websiteurl,
-                    this.myForm.value.starttime,
-                    this.myForm.value.endtime
+            // create a new act
+            const act = new Act(
+                this.myForm.value.title,
+                this.myForm.value.details,
+                this.myForm.value.address,
+                this.myForm.value.thumbnail,
+                this.myForm.value.websiteurl,
+                this.myForm.value.starttime,
+                this.myForm.value.endtime
+            );
+            this.actService.addAct(act)
+                .subscribe(
+                    data => {
+                        console.log(data)
+                        this.myForm.reset();
+                    },
+                    error => console.error(error)
                 );
-                this.actService.addAct(act)
-                    .subscribe(
-                        data => {
-                            console.log(data)
-                            this.myForm.reset();
-                        },
-                        error => console.error(error)
-                    );
-            }
         }
     }
 
@@ -159,10 +126,6 @@ export class ActInputComponent implements OnInit {
         if (this.myForm.value.details) {
             this.detailschar -= this.myForm.value.details.length
         }
-        if (this.myForm.value.capacity) {
-            this.capchar = this.myForm.value.capacity
-        }
-        this.pictureinput = this.myForm.value.picture
         this.thumbnailinput = this.myForm.value.thumbnail
     }
 
@@ -211,20 +174,12 @@ export class ActInputComponent implements OnInit {
                 Validators.minLength(6),
                 Validators.maxLength(40)
             ]),
-            category: new FormControl(null, Validators.required),
             details: new FormControl(null, [
                 Validators.required,
                 Validators.minLength(50),
                 Validators.maxLength(400)
             ]),
             address: new FormControl(null, Validators.required),
-            capacity: new FormControl(null, [
-                Validators.pattern("^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9])$")
-            ]),
-            picture: new FormControl(null, [
-                Validators.required,
-                Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
-            ]),
             thumbnail: new FormControl(null, [
                 Validators.required,
                 Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")

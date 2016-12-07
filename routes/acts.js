@@ -56,11 +56,8 @@ router.post('/', function (req, res, next) {
         // create and save a new act with user credentials in 'user' field
         var act = new Act({
             title: req.body.title,
-            category: req.body.category,
             details: req.body.details,
             address: req.body.address,
-            capacity: req.body.capacity,
-            picture: req.body.picture,
             thumbnail: req.body.thumbnail,
             websiteurl: req.body.websiteurl,
             starttime: req.body.starttime,
@@ -71,13 +68,13 @@ router.post('/', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
-                    error: { message: 'Unable to save act.' }
+                    error: { message: err }
                 });
             }
             // // add the new act into the user.acts array
             // // returns the new created act as a response to ng actService
-            // user.acts.push(result);
-            // user.save();
+            user.acts.push(result);
+            user.save();
             res.status(201).json({
                 message: 'Saved act',
                 obj: result
@@ -163,6 +160,7 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
+// adds the event id to the user attending event list
 router.post('/:id', function (req, res, next) {
     // decode the token to get current user id, find user using the id
     var decoded = jwt.decode(req.query.token);
