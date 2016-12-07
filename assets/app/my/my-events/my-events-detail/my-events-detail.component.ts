@@ -20,7 +20,7 @@ export class MyEventsDetailComponent {
         return this.authService.isHost();
     }
 
-    editClick (boolean: boolean) {
-        this.editboolean = boolean;
+    editEvent () {
+        alert('test')
     }
 }
