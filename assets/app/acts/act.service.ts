@@ -15,8 +15,8 @@ export class ActService {
     actIsEdit = new EventEmitter<Act>();
 
     // variable for changing between test and prod
-    // environment: string = "http://localhost:3000";
-    environment: string = "https://gowhere-wdi6.herokuapp.com";
+    environment: string = "http://localhost:3000";
+    // environment: string = "https://gowhere-wdi6.herokuapp.com";
 
     constructor(private http: Http, private errorService: ErrorService) { }
 
