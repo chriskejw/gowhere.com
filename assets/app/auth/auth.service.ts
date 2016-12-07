@@ -63,4 +63,5 @@ export class AuthService {
     isHost() {
         return localStorage.getItem('userType') === 'host';
     }
+
 }
