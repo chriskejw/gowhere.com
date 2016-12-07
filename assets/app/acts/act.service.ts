@@ -14,6 +14,10 @@ export class ActService {
     private acts: Act[] = [];
     actIsEdit = new EventEmitter<Act>();
 
+    // variable for changing between test and prod
+    // environment: string = "http://localhost:3000";
+    environment: string = "https://gowhere-wdi6.herokuapp.com";
+
     constructor(private http: Http, private errorService: ErrorService) { }
 
     // adds a act through http to node
@@ -29,7 +33,7 @@ export class ActService {
             : '';
         
         // post to node /act with token as req.query
-        return this.http.post('http://localhost:3000/act' + token, body, {headers: headers})
+        return this.http.post(`${this.environment}/act` + token, body, {headers: headers})
             // response is the new created act
             // .map uses the response to create and push the new act to the local acts array for consistency between other functions
             // the new created act is returned and used in act-input.component
@@ -61,7 +65,7 @@ export class ActService {
     // gets all the acts from node through http
     // (refer to authService for more details on this.http)
     getActs() {
-        return this.http.get('http://localhost:3000/act')
+        return this.http.get(`${this.environment}/act`)
             // response is all the acts returned from node get /acts
             // response is pushed and returned as an array of acts, to the act-list.component
             // the local acts array is replaced for consistency between other functions
@@ -111,7 +115,7 @@ export class ActService {
             : '';
         
         // patch to node /act/:id with token as req.query
-        return this.http.patch('http://localhost:3000/act/' + act.actId + token, body, {headers: headers})
+        return this.http.patch(`${this.environment}/act/` + act.actId + token, body, {headers: headers})
             // response is the updated act as a json used in act-input.component
             .map((response: Response) => response.json())
             .catch((error: Response) => {
@@ -127,7 +131,7 @@ export class ActService {
             : '';
 
         // delete to node /act/:id with token as req.query
-        return this.http.delete('http://localhost:3000/act/' + act.actId + token)
+        return this.http.delete(`${this.environment}/act/` + act.actId + token)
             // on success, act is removed from local acts array too
             // response is the deleted act in json, used in act.component
             .map((response: Response) => {
