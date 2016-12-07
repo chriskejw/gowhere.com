@@ -1,8 +1,10 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-4 col-md-offset-4">
     <!--tells ng to use our form, 'myForm'-->
+    <h1>Log In</h1>
+
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="email">Mail</label>
+            <label for="email">Email</label>
             <input
                     type="email"
                     id="email"
@@ -19,9 +21,9 @@
         </div>
         <!--disable button if form not valid-->
         <button
-                class="btn btn-primary"
+                class="btn btn-success"
                 type="submit"
-                [disabled]="!myForm.valid">Submit</button>
+                [disabled]="!myForm.valid">Log In</button>
     </form>
 </div>
 

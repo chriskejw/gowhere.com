@@ -138,17 +138,33 @@
             <button 
                     type="button"
                     class="btn btn-danger"
-                    (click)="onClear()">Clear
+                    (click)="onClear()">Reset
             </button>
 
             <!--disable button if form not valid-->
             <button
                     type="submit"
-                    class="btn btn-primary"
-                    [disabled]="!myForm.valid">Save
+                    class="btn btn-success"
+                    [disabled]="!myForm.valid">Save Changes
             </button>
 
         </div>
         </form>
     </article>
 </div>
+
+
+
+
+
+
+
+
+
+
+<!--<form>      
+  <input name="name" type="text" class="feedback-input" placeholder="Name" />   
+  <input name="email" type="text" class="feedback-input" placeholder="Email" />
+  <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+  <input type="submit" value="SUBMIT"/>
+</form>-->

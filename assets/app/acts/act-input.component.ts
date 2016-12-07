@@ -162,7 +162,7 @@ export class ActInputComponent implements OnInit {
         if (this.myForm.value.capacity) {
             this.capchar = this.myForm.value.capacity
         }
-        this.pictureinput = this.myForm.value.picture
+        // this.pictureinput = this.myForm.value.picture
         this.thumbnailinput = this.myForm.value.thumbnail
     }
 
