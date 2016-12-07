@@ -12,6 +12,7 @@ import { ErrorService } from "../errors/error.service";
 @Injectable()
 export class ActService {
     private acts: Act[] = [];
+    private joinedActs: Act[] = [];
     actIsEdit = new EventEmitter<Act>();
 
     // variable for changing between test and prod
@@ -41,11 +42,8 @@ export class ActService {
                 const result = response.json();
                 const act = new Act(
                     result.obj.title,
-                    result.obj.category,
                     result.obj.details,
                     result.obj.address,
-                    result.obj.capacity,
-                    result.obj.picture,
                     result.obj.thumbnail,
                     result.obj.websiteurl,
                     result.obj.starttime,
@@ -75,11 +73,8 @@ export class ActService {
                 for (let act of acts) {
                     transformedActs.push(new Act(
                         act.title,
-                        act.category,
                         act.details,
                         act.address,
-                        act.capacity,
-                        act.picture,
                         act.thumbnail,
                         act.websiteurl,
                         act.starttime,
@@ -144,19 +139,40 @@ export class ActService {
             });
     }
 
+    // posts the actid to node to add to user event attending list
     joinAct(actid: string) {
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
         
-        // patch to node /act/:id with token as req.query
+        // post to node /act/:id with token as req.query
         return this.http.post(`${this.environment}/act/` + actid + token, {headers: headers})
-            // response is the updated act as a json used in act-input.component
+            // response is the updated user as a json
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
     }
+
+    // gets the acts the user has joined from node /user/acts
+    getUserActs() {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+
+        // get from node /user/act/ with token as req.query
+        return this.http.get(`${this.environment}/user/acts/` + token, {headers: headers})
+            .map((response: Response) => {
+                this.joinedActs = response.json().obj.acts;
+                return this.joinedActs;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }    
+
 }

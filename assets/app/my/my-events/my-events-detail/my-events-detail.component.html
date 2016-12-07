@@ -1,18 +1,18 @@
 
 
-    		      <div class="col-md-4 box">
-              <div class="thumbnail">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Colective_portrait_of_activists_as_the_cashes_stop._Euromaidan,_Kyiv,_UKraine._Eventts_of_February_22,_2014..jpg" alt="">
-                <div class="caption">
-                  <h4 class='title'>hey</h4>
-                  <h6 class="startdate">hethtehthet</h6>
-                  <h6 class="url"><a>hthethtehet</a></h6>
-                  <p class='description'>tgetgetgrger</p>
-                </div>
-                <div class="button">
-                  <button class='btn btn-warning' *ngIf='isAHost()' (click)="editClick(true)">Edit Event</button>
-                  <br>
-                  <br>
-                </div>
-              </div>
-            </div>
+<div class="col-md-4 box">
+  <div class="thumbnail">
+    <img src="{{act.thumbnail}}" alt="">
+    <div class="caption">
+      <h4 class='title'>{{act.title}}</h4>
+      <h6 class="startdate">{{act.starttime | date:"dd/MM/yy HH:mm"}} - {{act.endtime | date:"dd/MM/yy HH:mm"}}</h6>
+      <h6 class="url"><a>{{act.websiteurl}}</a></h6>
+      <p class='description'>{{act.details}}</p>
+    </div>
+    <div class="button">
+      <button class='btn btn-warning' *ngIf='isAHost()' (click)="editClick(true)">Edit Event</button>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
