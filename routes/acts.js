@@ -35,7 +35,7 @@ router.use('/', function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: { message: 'Please login as a host to create an event.' }
+                error: { message: 'Please login before continuing.' }
             });
         }
         next();
@@ -74,10 +74,10 @@ router.post('/', function (req, res, next) {
                     error: { message: 'Unable to save act.' }
                 });
             }
-            // add the new act into the user.acts array
-            // returns the new created act as a response to ng actService
-            user.acts.push(result);
-            user.save();
+            // // add the new act into the user.acts array
+            // // returns the new created act as a response to ng actService
+            // user.acts.push(result);
+            // user.save();
             res.status(201).json({
                 message: 'Saved act',
                 obj: result
@@ -160,6 +160,34 @@ router.delete('/:id', function (req, res, next) {
                 obj: result
             });
         });
+    });
+});
+
+router.post('/:id', function (req, res, next) {
+    // decode the token to get current user id, find user using the id
+    var decoded = jwt.decode(req.query.token);
+    User.findById(decoded.user._id, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: { message: 'User not found.' }
+            });
+        }
+        User.findOne({'_id': decoded.user._id, 'acts': req.params.id}, function(err, found) {
+            if (found) {
+                return res.status(501).json({
+                    title: 'An error occurred',
+                    error: { message: 'You already joined this event.' }
+                });
+            }
+            user.acts.push(req.params.id);
+            user.save();
+            res.status(201).json({
+                message: 'Join event successful',
+                obj: user
+            });
+        })
+        
     });
 });
 

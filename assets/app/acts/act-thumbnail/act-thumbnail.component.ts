@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
+import { ActService } from "../act.service";
+import { AuthService } from "../../auth/auth.service";
 import { Act } from '../../acts/act.model'
 
 @Component({
@@ -10,7 +12,22 @@ import { Act } from '../../acts/act.model'
 export class ActThumbnailComponent {
     @Input() act: Act;
 
-    joinAct() {
-        alert('joining');
+    constructor(private actService: ActService, private authService: AuthService) { }
+    
+    joinAct(act: Act) {
+        this.actService.joinAct(act.actId)
+                .subscribe(
+                    user => {
+                        console.log(user)
+                    }
+                );
+    }
+
+    loggedIn() {
+        return this.authService.isLoggedIn();
+    }
+
+    isAHost() {
+        return this.authService.isHost();
     }
 }

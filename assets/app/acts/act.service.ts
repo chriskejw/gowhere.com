@@ -144,7 +144,19 @@ export class ActService {
             });
     }
 
-    joinAct(act: Act) {
+    joinAct(actid: string) {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
         
+        // patch to node /act/:id with token as req.query
+        return this.http.post(`${this.environment}/act/` + actid + token, {headers: headers})
+            // response is the updated act as a json used in act-input.component
+            .map((response: Response) => response.json())
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
     }
 }
