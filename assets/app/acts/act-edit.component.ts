@@ -36,6 +36,23 @@ import { Observable } from "rxjs";
         article.popDown img {
             margin-bottom: 30px;
         }
+        
+        img {
+            height: 222px;
+            width: 350px;
+        }
+
+        .imagePreview {
+            padding: 0;
+        }
+        
+        button {
+            margin: 15px;
+        }
+
+        .rightSide {
+            padding: auto 15px;
+        }
     `]
 })
 
@@ -45,6 +62,7 @@ export class ActEditComponent implements OnInit {
     titlechar: number;
     detailschar: number;
     thumbnailinput: string;
+    thumbnailTyped: boolean = false;
     mindateinput: string = `${new Date().getFullYear()}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
     maxdateinput: string = `${new Date().getFullYear() + 2}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + new Date().getDate()).slice(-2)}T${(new Date().getHours())}:00:00`;
 
@@ -127,7 +145,11 @@ export class ActEditComponent implements OnInit {
         if (this.myForm.value.details) {
             this.detailschar -= this.myForm.value.details.length
         }
+    }
+
+    inputThumbnail() {
         this.thumbnailinput = this.myForm.value.thumbnail
+        this.thumbnailTyped = true;
     }
 
     ngOnInit() {
@@ -188,7 +210,8 @@ export class ActEditComponent implements OnInit {
                 Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
             ]),
             websiteurl: new FormControl(null, [
-                Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
+                Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+([^\s]*)")
+                // Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
             ]),
             starttime: new FormControl(null, [
                 Validators.required,
