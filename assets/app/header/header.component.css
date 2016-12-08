@@ -1,3 +1,8 @@
+.logo {
+    height: 40px;
+    width: 180px;
+}
+
 .navbar.navbar-default {
     background: #141414;
     border: 0px;
