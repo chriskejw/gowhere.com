@@ -83,6 +83,24 @@ router.post('/', function (req, res, next) {
     });
 });
 
+// find and return a sinle acts, including all user credentials based on 'user' field
+router.get('/:id', function (req, res, next) {
+    Act.findOne({'_id': req.params.id})
+        .populate('user', 'username')
+        .exec(function (err, act) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: act
+            });
+        });
+});
+
 // edit act details if act found, and current user is the 'owner' of the act
 router.patch('/:id', function (req, res, next) {
     // decode the token to get current user id
@@ -107,6 +125,12 @@ router.patch('/:id', function (req, res, next) {
             });
         }
         act.title = req.body.title;
+        act.details = req.body.details;
+        act.address = req.body.address;
+        act.thumbnail = req.body.thumbnail;
+        act.websiteurl = req.body.websiteurl;
+        act.starttime = req.body.starttime;
+        act.endtime = req.body.endtime;
         act.save(function (err, result) {
             if (err) {
                 return res.status(500).json({

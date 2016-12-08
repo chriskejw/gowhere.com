@@ -1,5 +1,5 @@
 import { Http, Response, Headers } from "@angular/http";
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 // an observable third party library to unlock operators such as '.map' and 'Observable.'
 import 'rxjs/Rx';
@@ -11,9 +11,9 @@ import { ErrorService } from "../errors/error.service";
 // @Injectable, adds some metadata so http able to inject service into AuthService Class
 @Injectable()
 export class ActService {
+    private act: Act;
     private acts: Act[] = [];
     private joinedActs: Act[] = [];
-    actIsEdit = new EventEmitter<Act>();
 
     // variable for changing between test and prod
     environment: string = "http://localhost:3000";
@@ -93,16 +93,27 @@ export class ActService {
             });
     }
 
-    /* emits the act user wants to edit to act-input component,
-    which is subscribed to the event emitter*/
-    editAct(act: Act) {
-        this.actIsEdit.emit(act);
+    // get a single act from node using the act id, used for myevent/:id/edit
+    getAct (actid: string) {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        
+        // get from node /act/:id with token as req.query
+        return this.http.get(`${this.environment}/act/` + actid + token, {headers: headers})
+            // response is the updated act as a json used in act-input.component
+            .map((response: Response) => response.json())
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
     }
 
     // updates the existing act to node patch /acts/:id through http
     // (refer to authService for more details on this.http)
     // (refer to addAct above for more details on token)
-    updateAct(act: Act) {
+    updateAct(act: Act, actid: string) {
         const body = JSON.stringify(act);
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
@@ -110,7 +121,7 @@ export class ActService {
             : '';
         
         // patch to node /act/:id with token as req.query
-        return this.http.patch(`${this.environment}/act/` + act.actId + token, body, {headers: headers})
+        return this.http.patch(`${this.environment}/act/` + actid + token, body, {headers: headers})
             // response is the updated act as a json used in act-input.component
             .map((response: Response) => response.json())
             .catch((error: Response) => {
@@ -173,6 +184,6 @@ export class ActService {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
-    }    
+    }
 
 }
