@@ -9,6 +9,7 @@ import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { routing } from "./app.routing";
 import { ActInputComponent } from "./acts/act-input.component";
+import { ActEditComponent } from "./acts/act-edit.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
@@ -30,6 +31,7 @@ import { ActService } from "./acts/act.service";
         HeaderComponent,
         FooterComponent,
         ActInputComponent,
+        ActEditComponent,
         AuthenticationComponent,
         SignupComponent,
         SigninComponent,

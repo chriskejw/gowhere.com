@@ -136,12 +136,6 @@ export class ActInputComponent implements OnInit {
             this.router.navigateByUrl('/');
         }
 
-        // listening to actService's event emitter which activates when edit pressed
-        // this.act values are placed in the form because of [ngModel] in the html
-        this.actService.actIsEdit.subscribe(
-            (act: Act) => this.act = act
-        );
-
         interface ValidationResult {
             [key:string]:boolean;
         }
