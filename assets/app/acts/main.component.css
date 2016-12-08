@@ -2,8 +2,11 @@ h3.col-md-3 {
     color: white;
 }
 
-
-
+img.c {
+    height: 500px;
+    width: 1200px;
+    object-fit: cover;
+}
 
 
 .main-text
