@@ -26,7 +26,6 @@ export class MyEventsDetailComponent {
     }
 
     editEvent () {
-        // this.actService.editAct(this.act)
         this.router.navigate(['/', 'myevents', `${this.act._id}`, 'edit']);
     }
 }

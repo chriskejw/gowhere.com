@@ -99,11 +99,12 @@ export class ActEditComponent implements OnInit {
                 this.myForm.value.starttime,
                 this.myForm.value.endtime
             );
-            this.actService.updateAct(act)
+            this.actService.updateAct(act, this.router.url.slice(10, 34))
                 .subscribe(
                     data => {
                         console.log(data)
                         this.myForm.reset();
+                        this.router.navigateByUrl('/myevents');
                     },
                     error => console.error(error)
                 );
@@ -136,11 +137,13 @@ export class ActEditComponent implements OnInit {
             this.router.navigateByUrl('/');
         }
 
-        // listening to actService's event emitter which activates when edit pressed
-        // this.act values are placed in the form because of [ngModel] in the html
-        this.actService.actIsEdit.subscribe(
-            (act: Act) => this.act = act
-        );
+        // actService getAct gets a single act using the act id from url string
+        this.actService.getAct(this.router.url.slice(10, 34))
+                .subscribe(
+                    response => {
+                        this.act = response.obj
+                    }
+                );
 
         interface ValidationResult {
             [key:string]:boolean;

@@ -104,6 +104,7 @@ export class ActInputComponent implements OnInit {
                     data => {
                         console.log(data)
                         this.myForm.reset();
+                        this.router.navigateByUrl('/myevents');
                     },
                     error => console.error(error)
                 );
