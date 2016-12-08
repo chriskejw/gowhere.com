@@ -10,11 +10,11 @@ import { Router } from "@angular/router";
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
 
-// acts.component > act-input.component
+// acts.component > act-edit.component
 // renders the act form using template driven form
 @Component({
-    selector: 'app-act-input',
-    templateUrl: './act-input.component.html',
+    selector: 'app-act-edit',
+    templateUrl: './act-edit.component.html',
     styles: [`
         h3 {
             color: white;
@@ -39,7 +39,7 @@ import { Observable } from "rxjs";
     `]
 })
 
-export class ActInputComponent implements OnInit {
+export class ActEditComponent implements OnInit {
     myForm: FormGroup;
     act: Act;
     titlechar: number;
@@ -99,7 +99,7 @@ export class ActInputComponent implements OnInit {
                 this.myForm.value.starttime,
                 this.myForm.value.endtime
             );
-            this.actService.addAct(act)
+            this.actService.updateAct(act)
                 .subscribe(
                     data => {
                         console.log(data)
