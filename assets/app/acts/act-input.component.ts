@@ -36,6 +36,23 @@ import { Observable } from "rxjs";
         article.popDown img {
             margin-bottom: 30px;
         }
+        
+        img {
+            height: 222px;
+            width: 350px;
+        }
+
+        .imagePreview {
+            padding: 0;
+        }
+        
+        button {
+            margin: 15px;
+        }
+
+        .rightSide {
+            padding: auto 15px;
+        }
     `]
 })
 

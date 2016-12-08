@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <article class="popDown">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
@@ -111,7 +111,7 @@
                     (click)="onClear()">Reset
             </button>
 
-            <!--disable button if form not valid-->
+ 
             <button
                     type="submit"
                     class="btn btn-success"
@@ -121,7 +121,7 @@
         </div>
         </form>
     </article>
-</div>
+</div>-->
 
 
 
@@ -134,67 +134,114 @@
 
 
 
-
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
 <div class="container-fluid">
     <section class="container">
-		<div class="container-page">				
+		<div class="container-page">
+            <h1>Create Event</h1>				
 			<div class="col-md-6">
-				<h3 class="dark-grey">Create Event</h3>
 				
 				<div class="form-group col-lg-12">
-					<label>Username</label>
-					<input type="" name="" class="form-control" id="" value="">
+					<label>Title</label>
+					<span *ngIf="titlechar > 0 && titlechar < 6">(char left: {{titlechar}})</span>
+                <span class="danger" *ngIf="titlechar < -34">(max char: 40)</span>
+                <input 
+                    type="text"
+                    placeholder="e.g. Mega Sale @Ion Orchard"
+                    id="title"
+                    class="form-control"
+                    formControlName="title"
+                    [ngModel]="act?.title"
+                    (keyup)='inputCounter()'>
 				</div>
 				
 				<div class="form-group col-lg-6">
-					<label>Password</label>
-					<input type="password" name="" class="form-control" id="" value="">
+					<label>Start Date & Time</label>
+					<input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="starttime"
+                    class="form-control"
+                    formControlName="starttime"
+                    [ngModel]="act?.starttime"
+                    (keyup)='inputCounter()'>
 				</div>
 				
 				<div class="form-group col-lg-6">
-					<label>Repeat Password</label>
-					<input type="password" name="" class="form-control" id="" value="">
+					<label>End Date & Time</label>
+					<input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="endtime"
+                    class="form-control"
+                    formControlName="endtime"
+                    [ngModel]="act?.endtime"
+                    (keyup)='inputCounter()'>
 				</div>
 								
 				<div class="form-group col-lg-6">
-					<label>Email Address</label>
-					<input type="" name="" class="form-control" id="" value="">
+					<label>Location of Event</label>
+					<input
+                    type="text"
+                    placeholder="e.g. 8 Claymore Hill"
+                    id="address"
+                    class="form-control"
+                    formControlName="address"
+                    [ngModel]="act?.address">
 				</div>
 				
 				<div class="form-group col-lg-6">
-					<label>Repeat Email Address</label>
-					<input type="" name="" class="form-control" id="" value="">
-				</div>			
-				
-				<div class="col-sm-6">
-					<input type="checkbox" class="checkbox" />Sigh up for our newsletter
+					<label>Event Website URL</label>
+					<input
+                    type="text"
+                    placeholder="e.g. https://www.gowhere.com.sg"
+                    id="websiteurl"
+                    class="form-control"
+                    formControlName="websiteurl"
+                    [ngModel]="act?.websiteurl">
 				</div>
 
-				<div class="col-sm-6">
-					<input type="checkbox" class="checkbox" />Send notifications to this email
-				</div>				
-			
+                <div class="form-group col-lg-12">
+					<label>Image</label>
+					<input
+                    type="text"
+                    placeholder="Image URL: .jpg/.png/.jpeg"
+                    id="thumbnail"
+                    class="form-control"
+                    formControlName="thumbnail"
+                    [ngModel]="act?.thumbnail"
+                    (keyup)='inputCounter()'>
+				</div>
+
 			</div>
 		
-			<div class="col-md-6">
-				<h3 class="dark-grey">Terms and Conditions</h3>
-				<p>
-					By clicking on "Register" you agree to The Company's' Terms and Conditions
-				</p>
-				<p>
-					While rare, prices are subject to change based on exchange rate fluctuations - 
-					should such a fluctuation happen, we may request an additional payment. You have the option to request a full refund or to pay the new price. (Paragraph 13.5.8)
-				</p>
-				<p>
-					Should there be an error in the description or pricing of a product, we will provide you with a full refund (Paragraph 13.5.6)
-				</p>
-				<p>
-					Acceptance of an order by us is dependent on our suppliers ability to provide the product. (Paragraph 13.5.6)
-				</p>
-				
-				<button type="submit" class="btn btn-primary">Register</button>
-			</div>
+			<div class="rightSide col-md-6">
+				<label>Image Preview</label>
+                <br><br>
+                <div class='imagePreview col-md-6'>
+                    <img class="image" src ="{{thumbnailinput}}" alt="Image Preview"/>
+                </div>
+            </div>
+
 		</div>
+
+                <div class="buttonBelow col-md-12">
+                    <button 
+                        type="button"
+                        class="btn btn-danger col-md-2"
+                        (click)="onClear()">Reset Fields
+                    </button>		
+                    <button
+                        type="submit"
+                        class="btn btn-success col-md-3"
+                        [disabled]="!myForm.valid">Post Event
+                    </button>
+                </div>
+
 	</section>
 </div>
+
+</form>
