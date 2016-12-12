@@ -1,5 +1,7 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-4 col-md-offset-4">
     <!--tells ng to use our form, 'myForm'-->
+    <h1>Sign Up</h1>
+
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="email">Email</label>
@@ -21,20 +23,20 @@
                     (keyup)='inputCounter()'>
         </div>
         <div class="form-group radiotext">
-            <label for="usertype">User Type</label><br>
+            <label for="usertype">Please select if you are a:</label><br>
             <input 
                     type="radio"
                     value="participant"
                     formControlName="usertype"
                     #participantinput
                     id="checkparticipant"
-                    (click)="typeChange(participantinput.value)"> participant<br>
+                    (click)="typeChange(participantinput.value)"> Participant<br>
             <input 
                     type="radio"
                     value="host"
                     formControlName="usertype"
                     #hostinput
-                    (click)="typeChange(hostinput.value)"> host<br>
+                    (click)="typeChange(hostinput.value)"> Host<br>
         </div>
         <div class="form-group">
             <label for="username" id="hostname">{{usernameLabel}} </label>
@@ -57,9 +59,12 @@
         </div>
         <!--disable button if form not valid-->
         <button
-                class="btn btn-primary"
+                class="btn btn-success"
                 type="submit"
                 [disabled]="!myForm.valid">Submit
         </button>
     </form>
 </div>
+
+
+

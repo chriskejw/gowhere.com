@@ -1,5 +1,5 @@
 import { Http, Response, Headers } from "@angular/http";
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 // an observable third party library to unlock operators such as '.map' and 'Observable.'
 import 'rxjs/Rx';
@@ -11,12 +11,13 @@ import { ErrorService } from "../errors/error.service";
 // @Injectable, adds some metadata so http able to inject service into AuthService Class
 @Injectable()
 export class ActService {
+    private act: Act;
     private acts: Act[] = [];
-    actIsEdit = new EventEmitter<Act>();
+    private joinedActs: Act[] = [];
 
     // variable for changing between test and prod
-    // environment: string = "http://localhost:3000";
-    environment: string = "https://gowhere-wdi6.herokuapp.com";
+    environment: string = "http://localhost:3000";
+    // environment: string = "https://gowhere-wdi6.herokuapp.com";
 
     constructor(private http: Http, private errorService: ErrorService) { }
 
@@ -41,11 +42,8 @@ export class ActService {
                 const result = response.json();
                 const act = new Act(
                     result.obj.title,
-                    result.obj.category,
                     result.obj.details,
                     result.obj.address,
-                    result.obj.capacity,
-                    result.obj.picture,
                     result.obj.thumbnail,
                     result.obj.websiteurl,
                     result.obj.starttime,
@@ -75,11 +73,8 @@ export class ActService {
                 for (let act of acts) {
                     transformedActs.push(new Act(
                         act.title,
-                        act.category,
                         act.details,
                         act.address,
-                        act.capacity,
-                        act.picture,
                         act.thumbnail,
                         act.websiteurl,
                         act.starttime,
@@ -98,16 +93,27 @@ export class ActService {
             });
     }
 
-    /* emits the act user wants to edit to act-input component,
-    which is subscribed to the event emitter*/
-    editAct(act: Act) {
-        this.actIsEdit.emit(act);
+    // get a single act from node using the act id, used for myevent/:id/edit
+    getAct (actid: string) {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+        
+        // get from node /act/:id with token as req.query
+        return this.http.get(`${this.environment}/act/` + actid + token, {headers: headers})
+            // response is the updated act as a json used in act-input.component
+            .map((response: Response) => response.json())
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
     }
 
     // updates the existing act to node patch /acts/:id through http
     // (refer to authService for more details on this.http)
     // (refer to addAct above for more details on token)
-    updateAct(act: Act) {
+    updateAct(act: Act, actid: string) {
         const body = JSON.stringify(act);
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token')
@@ -115,7 +121,7 @@ export class ActService {
             : '';
         
         // patch to node /act/:id with token as req.query
-        return this.http.patch(`${this.environment}/act/` + act.actId + token, body, {headers: headers})
+        return this.http.patch(`${this.environment}/act/` + actid + token, body, {headers: headers})
             // response is the updated act as a json used in act-input.component
             .map((response: Response) => response.json())
             .catch((error: Response) => {
@@ -144,7 +150,40 @@ export class ActService {
             });
     }
 
-    joinAct(act: Act) {
+    // posts the actid to node to add to user event attending list
+    joinAct(actid: string) {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
         
+        // post to node /act/:id with token as req.query
+        return this.http.post(`${this.environment}/act/` + actid + token, {headers: headers})
+            // response is the updated user as a json
+            .map((response: Response) => response.json())
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
     }
+
+    // gets the acts the user has joined from node /user/acts
+    getUserActs() {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token')
+            ? '?token=' + localStorage.getItem('token')
+            : '';
+
+        // get from node /user/act/ with token as req.query
+        return this.http.get(`${this.environment}/user/acts/` + token, {headers: headers})
+            .map((response: Response) => {
+                this.joinedActs = response.json().obj.acts;
+                return this.joinedActs;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
+
 }

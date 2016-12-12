@@ -9,12 +9,13 @@ import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { routing } from "./app.routing";
 import { ActInputComponent } from "./acts/act-input.component";
+import { ActEditComponent } from "./acts/act-edit.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
 import { ErrorComponent } from "./errors/error.component";
 import { MainComponent } from "./acts/main.component";
-import { ActDetailComponent } from "./acts/act-detail/act-detail.component";
+import { MyEventsDetailComponent } from "./my/my-events/my-events-detail/my-events-detail.component";
 import { DropdownDirective } from './header/dropdown.directive';
 import { MyEventsComponent } from './my/my-events/my-events.component';
 import { ActThumbnailComponent } from './acts/act-thumbnail/act-thumbnail.component';
@@ -30,12 +31,13 @@ import { ActService } from "./acts/act.service";
         HeaderComponent,
         FooterComponent,
         ActInputComponent,
+        ActEditComponent,
         AuthenticationComponent,
         SignupComponent,
         SigninComponent,
         ErrorComponent,
         MainComponent,
-        ActDetailComponent,
+        MyEventsDetailComponent,
         DropdownDirective,
         MyEventsComponent,
         ActThumbnailComponent

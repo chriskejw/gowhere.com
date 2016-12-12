@@ -1,0 +1,15 @@
+.radiotext, label, span {
+            color: white;
+        }
+        input.ng-invalid.ng-touched {
+            border: 1px solid red;
+            color: darkred;
+        }
+        span.danger {
+            color: #D23029;
+        }
+
+
+
+
+

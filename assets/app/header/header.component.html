@@ -28,8 +28,8 @@
         <li class="dropdown" rbDropdown>
           <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a [routerLink]="['/myevents']">My Events <span class="badge">5</span></a></li>
-            <li><a [routerLink]="['/acts']" *ngIf="isAHost()">Create Event</a></li>
+            <li><a [routerLink]="['/myevents']">My Events</a></li>
+            <li><a *ngIf="isAHost()" [routerLink]="['/new']">Create Event</a></li>
             <li role="separator" class="divider"></li>
             <li><a (click)="onLogout()">Logout</a></li>
           </ul>

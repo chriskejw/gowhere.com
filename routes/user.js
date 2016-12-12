@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
+var Act = require('../models/act');
 
 // create a new user, hash password with bcrypt
 router.post('/', function (req, res, next) {
@@ -104,5 +105,46 @@ router.post('/signin', function(req, res, next) {
         });
     });
 });
+
+// return error if user not logged in
+router.use('/', function (req, res, next) {
+
+    /**
+     * validate incoming token, if valid, continue operations with next()
+     * @param  token of type string
+     * @param  secret string, same as secret in user routes
+     */
+    jwt.verify(req.query.token, 'secret', function (err, decoded) {
+        if (err) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: { message: 'Please login before continuing.' }
+            });
+        }
+        next();
+    })
+});
+
+router.get('/acts', function (req, res, next) {
+    // decode the token to get current user id, find user using the id
+    var decoded = jwt.decode(req.query.token);
+    User.findById(decoded.user._id)
+    .populate('acts')
+    .exec (function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: { message: 'User not found.' }
+            });
+        }
+        res.status(201).json({
+            message: 'Found user',
+            obj: user
+        });
+    });
+});
+
+
+
 
 module.exports = router;

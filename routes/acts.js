@@ -7,7 +7,7 @@ var Act = require('../models/act');
 
 // find and return all the acts, including all user credentials based on 'user' field
 router.get('/', function (req, res, next) {
-    Act.find()
+    Act.find({"starttime" : {"$gte": new Date()}})
         .populate('user', 'username')
         .exec(function (err, acts) {
             if (err) {
@@ -35,7 +35,7 @@ router.use('/', function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: { message: 'Please login as a host to create an event.' }
+                error: { message: 'Please login before continuing.' }
             });
         }
         next();
@@ -56,11 +56,8 @@ router.post('/', function (req, res, next) {
         // create and save a new act with user credentials in 'user' field
         var act = new Act({
             title: req.body.title,
-            category: req.body.category,
             details: req.body.details,
             address: req.body.address,
-            capacity: req.body.capacity,
-            picture: req.body.picture,
             thumbnail: req.body.thumbnail,
             websiteurl: req.body.websiteurl,
             starttime: req.body.starttime,
@@ -71,11 +68,11 @@ router.post('/', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occurred',
-                    error: { message: 'Unable to save act.' }
+                    error: { message: err }
                 });
             }
-            // add the new act into the user.acts array
-            // returns the new created act as a response to ng actService
+            // // add the new act into the user.acts array
+            // // returns the new created act as a response to ng actService
             user.acts.push(result);
             user.save();
             res.status(201).json({
@@ -84,6 +81,24 @@ router.post('/', function (req, res, next) {
             });
         });
     });
+});
+
+// find and return a sinle acts, including all user credentials based on 'user' field
+router.get('/:id', function (req, res, next) {
+    Act.findOne({'_id': req.params.id})
+        .populate('user', 'username')
+        .exec(function (err, act) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: act
+            });
+        });
 });
 
 // edit act details if act found, and current user is the 'owner' of the act
@@ -110,6 +125,12 @@ router.patch('/:id', function (req, res, next) {
             });
         }
         act.title = req.body.title;
+        act.details = req.body.details;
+        act.address = req.body.address;
+        act.thumbnail = req.body.thumbnail;
+        act.websiteurl = req.body.websiteurl;
+        act.starttime = req.body.starttime;
+        act.endtime = req.body.endtime;
         act.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -160,6 +181,35 @@ router.delete('/:id', function (req, res, next) {
                 obj: result
             });
         });
+    });
+});
+
+// adds the event id to the user attending event list
+router.post('/:id', function (req, res, next) {
+    // decode the token to get current user id, find user using the id
+    var decoded = jwt.decode(req.query.token);
+    User.findById(decoded.user._id, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: { message: 'User not found.' }
+            });
+        }
+        User.findOne({'_id': decoded.user._id, 'acts': req.params.id}, function(err, found) {
+            if (found) {
+                return res.status(501).json({
+                    title: 'An error occurred',
+                    error: { message: 'You already joined this event.' }
+                });
+            }
+            user.acts.push(req.params.id);
+            user.save();
+            res.status(201).json({
+                message: 'Join event successful',
+                obj: user
+            });
+        })
+        
     });
 });
 

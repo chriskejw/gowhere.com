@@ -1,16 +1,18 @@
 
-  <div class="tile">
-    <div class="tile__media">
-
-      <img class="tile__img" src="{{act.thumbnail}}" alt=""  />
-    
-      <div class="tile__details">
-
-        <div class="tile__title">{{act.title}}</div>
-
-        <i class="fa fa-angle-down"></i>
-      </div>
-
-    </div>  
+<div class="col-md-4 box">
+  <div class="thumbnail">
+    <img src="{{act.thumbnail}}" alt="">
+    <div class="caption">
+      <h4 class='title'>{{act.title}}</h4>
+      <h6 class="startdate">{{act.starttime | date:"dd/MM/yy HH:mm"}} - {{act.endtime | date:"dd/MM/yy HH:mm"}}</h6>
+      <h6 class="url"><a href="{{act.websiteurl}}">{{act.websiteurl}}</a></h6>
+      <p class='description'>{{act.details}}</p>
+    </div>
+    <div class="button">
+      <button class='btn btn-success' *ngIf="!isAHost() && loggedIn()" (click)="joinAct(act)">Join Event</button>
+      <br>
+      <br>
+    </div>
   </div>
+</div>
 

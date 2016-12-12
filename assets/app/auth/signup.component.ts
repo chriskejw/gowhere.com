@@ -8,18 +8,7 @@ import { User } from "./user.model";
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
-    styleUrls: [`
-        .radiotext, label, span {
-            color: white;
-        }
-        input.ng-invalid.ng-touched {
-            border: 1px solid red;
-            color: darkred;
-        }
-        span.danger {
-            color: #D23029;
-        }
-    `]
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
     // set myForm variable as a type of FormGroup
