@@ -7,7 +7,7 @@ var Act = require('../models/act');
 
 // find and return all the acts, including all user credentials based on 'user' field
 router.get('/', function (req, res, next) {
-    Act.find()
+    Act.find({"starttime" : {"$gte": new Date()}})
         .populate('user', 'username')
         .exec(function (err, acts) {
             if (err) {
