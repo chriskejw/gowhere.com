@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <article class="popDown">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
@@ -112,7 +112,7 @@
             </button>
 
             <!--disable button if form not valid-->
-            <button
+            <!--<button
                     type="submit"
                     class="btn btn-success"
                     [disabled]="!myForm.valid">Save Changes
@@ -121,11 +121,7 @@
         </div>
         </form>
     </article>
-</div>
-
-
-
-
+</div>-->
 
 
 
@@ -138,3 +134,133 @@
   <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
   <input type="submit" value="SUBMIT"/>
 </form>-->
+
+
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+<div class="container-fluid">
+    <section class="container">
+		<div class="container-page">
+            <h1>Edit Event</h1>				
+			<div class="col-md-6">
+				
+				<div class="form-group col-lg-12">
+					<label>Title</label>
+					<span *ngIf="titlechar > 0 && titlechar < 6">(char left: {{titlechar}})</span>
+                <span class="danger" *ngIf="titlechar < -34">(max char: 40)</span>
+                <input 
+                    type="text"
+                    placeholder="e.g. Mega Sale @Ion Orchard"
+                    id="title"
+                    class="form-control"
+                    formControlName="title"
+                    [ngModel]="act?.title"
+                    (keyup)='inputCounter()'>
+				</div>
+				
+				<div class="form-group col-lg-6">
+					<label>Start Date & Time</label>
+					<input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="starttime"
+                    class="form-control"
+                    formControlName="starttime"
+                    [ngModel]="act?.starttime"
+                    (keyup)='inputCounter()'>
+				</div>
+				
+				<div class="form-group col-lg-6">
+					<label>End Date & Time</label>
+					<input
+                    type="datetime-local"
+                    [min]="mindateinput"
+                    [max]="maxdateinput"
+                    id="endtime"
+                    class="form-control"
+                    formControlName="endtime"
+                    [ngModel]="act?.endtime"
+                    (keyup)='inputCounter()'>
+				</div>
+
+                <div class="form-group col-lg-6">
+                    <label>Details </label>
+                    <span *ngIf="detailschar > 0 && detailschar < 50">(char left: {{detailschar}})</span>
+                    <span class="danger" *ngIf="detailschar < -350">(max char: 400)</span>
+                    <textarea
+                    rows="4"
+                    placeholder="Details"
+                    id="details"
+                    class="form-control"
+                    formControlName="details"
+                    [ngModel]="act?.details"
+                    (keyup)='inputCounter()'>
+                    </textarea>
+                </div>
+
+				<div class="form-group col-lg-6">
+					<label>Location of Event</label>
+					<input
+                    type="text"
+                    placeholder="e.g. 8 Claymore Hill"
+                    id="address"
+                    class="form-control"
+                    formControlName="address"
+                    [ngModel]="act?.address">
+				</div>
+				
+				<div class="form-group col-lg-6">
+					<label>Event Website URL</label>
+					<input
+                    type="text"
+                    placeholder="e.g. https://www.gowhere.com.sg"
+                    id="websiteurl"
+                    class="form-control"
+                    formControlName="websiteurl"
+                    [ngModel]="act?.websiteurl">
+				</div>
+
+                <div class="form-group col-lg-12">
+					<label>Image</label>
+					<input
+                    type="text"
+                    placeholder="Image URL: .jpg/.png/.jpeg"
+                    id="thumbnail"
+                    class="form-control"
+                    formControlName="thumbnail"
+                    [ngModel]="act?.thumbnail"
+                    (keyup)='inputThumbnail()'>
+				</div>
+
+			</div>
+		
+			<div class="rightSide col-md-6">
+				<label>Image Preview</label>
+                <br><br>
+                <div class='imagePreview col-md-6'>
+                    <img *ngIf="act && !thumbnailTyped" class="image" src ="{{act.thumbnail}}" alt="Image Preview"/>
+                    <img *ngIf="thumbnailTyped" class="image" src ="{{thumbnailinput}}" alt="Image Preview"/>
+                </div>
+            </div>
+
+		</div>
+
+                <div class="buttonBelow col-md-12">
+                    <button 
+                        type="button"
+                        class="btn btn-danger col-md-2"
+                        (click)="onClear()">Reset Fields
+                    </button>		
+                    <button
+                        type="submit"
+                        class="btn btn-success col-md-3"
+                        [disabled]="!myForm.valid">Post Event
+                    </button>
+                </div>
+
+	</section>
+</div>
+
+</form>

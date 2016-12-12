@@ -197,7 +197,8 @@ export class ActInputComponent implements OnInit {
                 Validators.pattern("(https?:\/\/.*\.(?:png|jpg|jpeg|PNG|JPG|JPEG))")
             ]),
             websiteurl: new FormControl(null, [
-                Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
+                Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+([^\s]*)")
+                // Validators.pattern("(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)|www\.[^\s]+\.[^\s]{2,}")
             ]),
             starttime: new FormControl(null, [
                 Validators.required,
