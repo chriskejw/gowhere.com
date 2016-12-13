@@ -1,6 +1,6 @@
 # Title
 
-www.gowhere.com | Singapore Event Listing Website
+gowhere.com | Singapore Event Listing Website
 
 # Link
 Heroku link: (https://gowhere-wdi6.herokuapp.com/)
